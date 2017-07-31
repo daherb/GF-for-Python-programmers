@@ -1,7 +1,34 @@
 \documentclass{scrartcl}
+\usepackage{listings}
+\usepackage{iftex}
+% Pakete u.a. für die Darstellung von Umlauten/Sonderzeichen
+\ifPDFTeX
+   \usepackage[utf8]{inputenc}
+   \usepackage[T1]{fontenc}
+   \usepackage{lmodern}
+\else
+   \ifXeTeX
+     \usepackage{xltxtra}
+   \else 
+     \usepackage{luatextra}
+   \fi
+   \defaultfontfeatures{Ligatures=TeX}
+\fi
+
+\lstdefinelanguage{gf}
+{
+  morekeywords={abstract, flags, cat, fun, incomplete, concrete, of, open, in, lincat, lin, resource, param, oper, variants, table, interface, instance, def, data, lindef, printname,},
+  sensitive=false,
+  morecomment=[l]{--},
+  morestring=[b]",
+  stringstyle={\textit}
+}
+\lstset{basicstyle=\ttfamily}
+
 
 \title{Grammatical Framework for Python programmers}
 \begin{document}
+\maketitle
 \section{Types}
 \subsection{Dynamic typing in Python}
 \subsection{Static typing in GF}
