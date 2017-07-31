@@ -31,11 +31,125 @@
 \maketitle
 \section{Types}
 \subsection{Dynamic typing in Python}
-\subsection{Static typing in GF}
+
+Basic types in Python consist of Strings and Numbers (Integer, Float, Complex). A special case are boolean (logical expression) that will be explained later.
+You can ask Python to give you the type for expressions. These types are automatically inferred, we don't even have to help Python to figure out what type
+a variable has, as can be seen in the last example below.
+
+\begin{verbatim}
+>>> type(3)
+<class 'int'>
+>>> type(3.0)
+<class 'float'>
+>>> type("Foo")
+<class 'str'>
+>>> type(complex('1+2j')) # Is that still considered basic?
+<class 'complex'>
+>>> a=3
+>>> type(a)
+<class 'int'>
+\end{verbatim}
+
+These basic types can be used as the form compound types. Compound types are among others Lists, Tuples and Dictionaries.
+Thse again can be part of other compound types as well, e.g. list containing lists as elements. Python does not really enforce
+that all elements of a list have the same type(!) as you can see in the examples. To access elements in compound objects we
+can use the \texttt{[]} operator.
+
+\begin{verbatim}
+>>> type([])
+<class 'list'>
+>>> type([1,2,3])
+<class 'list'>
+>>> type([1,2,"foo","bar"])
+<class 'list'>
+<class 'list'>
+>>> type(())
+<class 'tuple'>
+>>> type((1,2))
+<class 'tuple'>
+>>> type((1,2,"foo"))
+<class 'tuple'>
+>>> type({})
+<class 'dict'>
+>>> type({'foo':1,'bar':2})
+<class 'dict'>
+>>> type({'foo':1,'bar':'baz'})
+<class 'dict'>
+\end{verbatim}
+
+A special case in Python are truth values. Python does not just have a boolean datatype but interprets certain values of other types as truth values.
+The values considered \textbf{false} are: 
 \begin{itemize}
-\item Strings vs. Token lists
-\item Function types
+\item \texttt{None} i.e. the empty object
+\item \texttt{False} i.e. the logical constant
+\item \texttt{zero} of any numeric type, e.g. \texttt{0, 0.0, 0j}.
+\item any empty sequence, e.g.\texttt{'', (), []}, i.e. empty string, tuple, or list.
+\item any empty mapping, for example, \texttt{\{\}}.
+\item instances of user-defined classes, if the class defines a \_\_bool\_\_() or \_\_len\_\_() method, when that method returns the integer zero or bool value False.
 \end{itemize}
+Everything else is considered \textbf{true}.
+
+Another interesting group of datatypes are enumeration types where you define a type by listing all possible values. In Python enumerable types are objects of class \texttt{enum} as can be seen in the next example. They can also for example be used as keys in dictionary. That gives us a way to express a mapping from grammatical number and case to a word form for german nouns.
+
+\begin{verbatim}
+>> class Number(Enum):
+...   Sg = 1
+...   Pl = 2
+... 
+>>> man={Number.Sg:"man",Number.Pl:"men"}
+>>> man[Number.Sg]
+'man'
+>>> class Case(Enum):
+...   Nom = 1
+...   Gen = 2
+...   Dat = 3
+...   Acc = 4
+... 
+>>> mann={Number.Sg:{Case.Nom:"Mann", 
+...                  Case.Gen:"Mannes", 
+...                  Case.Dat:"Mann", 
+...                  Case.Acc:"Mann"},
+...       Number.Pl:{Case.Nom:"Männer", 
+...                  Case.Gen:"Männer", 
+...                  Case.Dat:"Männern", 
+...                  Case.Acc:"Männern"}
+... }
+>>> mann[Number.Sg][Case.Gen]
+'Mannes'
+\end{verbatim}
+
+One problem with this aproach is that Python does not enforce that we define mappings for all possible values which can be prone to errors. In the next example we only define values for some of the keys and then try to access undefined values which leads to an error.
+
+\begin{verbatim}
+>>> mann={
+...   Number.Sg:{
+...     Case.Nom:"Mann"
+...   },
+...   Number.Pl:{
+...     Case.Dat:"Männern"
+...   }
+... }
+>>> mann[Number.Sg][Case.Gen]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: <Case.Gen: 2>
+\end{verbatim}
+
+In addition we will have a look at functions. Functions in Python are usually defined and given a name. But Python also supports so-called
+anonymous functions or lambda expressions. Below the successor function is defined in two differnt ways
+\begin{verbatim}
+>>> def succ(x) :
+...   return x+1
+... 
+>>> type(succ)
+<class 'function'>
+>>> succ2 = lambda x : x+1
+>>> type(succ2)
+<class 'function'>
+>>> type(lambda x: x+1)
+<class 'function'>
+\end{verbatim}
+
 \section{Context-free Grammars}
 \subsection{Context-free Grammars in NLTK}
 \subsection{Context-free Grammars in GF}
