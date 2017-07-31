@@ -150,6 +150,40 @@ anonymous functions or lambda expressions. Below the successor function is defin
 <class 'function'>
 \end{verbatim}
 
+\subsection{Static typing in GF}
+
+Types in GF are a bit more complicated. Due to the separation in abstract modules, concrete modules and resource modules we have different types that are important in different situations. To keep it simple for the beginning we will just look at resource modules for the moment. Here we can use all the different types available in GF. These incluse Token lists (Str), Integers, Floats, and Bool. Most of them are defined in a module called Predef but Bool is defined in the module Prelude. Anonymous function types (lambdas) are standard types in GF and in resource modules the only way to define functions.
+
+\lstinputlisting[language=gf]{src/SimpleTypes.gf}
+
+As you can see in the examples above, for each variable we first give the type for each of the variable. That is best practice but for most of these simple cases it is not really necessary because GF can infer the type automatically. The only case where the type has to be given is the function.
+
+Also there is a difference between the operators \texttt{+} and \texttt{++}. The reason for that is that GF has a distinction between strings and string tuples as well as between compiletime strings and runtime strings.
+
+Finally the function is esentially a lambda expression like the one used in Python. The difference is that the keyword \texttt{lambda} is replace by a backslash (\texttt{\textbackslash}) and the colon that separates the parameter from the function body is replaced by an arrow (\texttt{->}).
+
+\begin{verbatim}
+> cc s
+"foobar"
+0 msec
+> cc st
+"foo" ++ "bar"
+0 msec
+> cc b
+Prelude.False
+0 msec
+> cc i
+42
+0 msec
+> cc f
+23.5
+0 msec
+> cc bar "foo"
+"foobar"
+0 msec
+\end{verbatim}
+
+Compound types are tables, records and function types
 \section{Context-free Grammars}
 \subsection{Context-free Grammars in NLTK}
 \subsection{Context-free Grammars in GF}
