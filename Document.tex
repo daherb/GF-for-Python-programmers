@@ -23,6 +23,14 @@
   morestring=[b]",
   stringstyle={\textit}
 }
+\lstdefinelanguage{cf}
+{
+  morekeywords={::=,.,},
+  sensitive=false,
+  morecomment=[l]{--},
+  morestring=[b]",
+  stringstyle={\textit}
+}
 \lstset{basicstyle=\ttfamily}
 
 \newtheorem{exercise}{Exercise}
@@ -198,6 +206,9 @@ Compound types are tables, records and function types
   The first one should be accepted and the second one rejected.
 \end{exercise}
 \subsection{Context-free Grammars in GF}
+\lstinputlisting[language=cf]{src/GF-CF.cf}
+\lstinputlisting[language=cf]{src/GF-CF2.cf}
+\lstinputlisting[language=cf]{src/GF-CF3.cf}
 \begin{exercise}
   Write the same grammar from the previous task in GF. Generate all trees accounted for by the grammar. Can you guess how many trees will be
   generated from a grammar?
