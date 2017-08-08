@@ -220,14 +220,17 @@ A simple form of grammars are the so-called context-free grammars. They can be u
   generated from a grammar?
 \end{exercise}
 \section{Step beyond Context-freeness: Tables and Records}
-\subsection{In Python}
-\subsection{In GF}
 \section{Smart paradigms}
+A smart paradigm in the GF jargon is a function that takes one or a few word forms and uses this information provided to generate the whole paradigm, i.e. the list of all word forms depending on the grammatical features the word is inflected on.
+
+We can implement this kind of function both in Python and GF.
 \subsection{Smart paradigms in Python}
 \begin{exercise}
   Implement a function that takes a string of a noun and generates the regular noun paradigm for English as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types
 \end{exercise}
 \subsection{Smart paradigms in GF}
+
+\lstinputlisting[language=gf]{src/SmartParadigm.gf}
 \section{Other problems}
 \begin{itemize}
 \item compile-time vs. run-time strings
