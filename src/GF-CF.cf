@@ -1,0 +1,6 @@
+Sentence   . S   ::= NP VP
+NounPhrase . NP  ::= Det N
+VerbPhrase . VP  ::= IV
+Determiner . Det ::= "the"
+Man        . N   ::= "man"
+Walk       . IV  ::= "walks"
