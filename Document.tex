@@ -25,6 +25,7 @@
 }
 \lstset{basicstyle=\ttfamily}
 
+\newtheorem{exercise}{Exercise}
 
 \title{Grammatical Framework for Python programmers}
 \begin{document}
@@ -118,6 +119,9 @@ Another interesting group of datatypes are enumeration types where you define a 
 'Mannes'
 \end{verbatim}
 
+\begin{exercise}
+  If you haven't done so before, try the type() function in Python on different values and compare the output. 
+\end{exercise}
 One problem with this aproach is that Python does not enforce that we define mappings for all possible values which can be prone to errors. In the next example we only define values for some of the keys and then try to access undefined values which leads to an error.
 
 \begin{verbatim}
@@ -186,12 +190,26 @@ Prelude.False
 Compound types are tables, records and function types
 \section{Context-free Grammars}
 \subsection{Context-free Grammars in NLTK}
+\begin{exercise}
+  Write a context-free grammar accounting for the following sentences in Italian:
+  ...
+  Try to parse the following strings:
+
+  The first one should be accepted and the second one rejected.
+\end{exercise}
 \subsection{Context-free Grammars in GF}
+\begin{exercise}
+  Write the same grammar from the previous task in GF. Generate all trees accounted for by the grammar. Can you guess how many trees will be
+  generated from a grammar?
+\end{exercise}
 \section{Step beyond Context-freeness: Tables and Records}
 \subsection{In Python}
 \subsection{In GF}
 \section{Smart paradigms}
 \subsection{Smart paradigms in Python}
+\begin{exercise}
+  Implement a function that takes a string of a noun and generates the regular noun paradigm for English as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types
+\end{exercise}
 \subsection{Smart paradigms in GF}
 \section{Other problems}
 \begin{itemize}
