@@ -132,6 +132,7 @@ Another interesting group of datatypes are enumeration types where you define a 
 \begin{exercise}
   If you haven't done so before, try the type() function in Python on different values and compare the output. 
 \end{exercise}
+
 One problem with this aproach is that Python does not enforce that we define mappings for all possible values which can be prone to errors. In the next example we only define values for some of the keys and then try to access undefined values which leads to an error.
 
 \begin{verbatim}
@@ -151,6 +152,7 @@ KeyError: <Case.Gen: 2>
 
 In addition we will have a look at functions. Functions in Python are usually defined and given a name. But Python also supports so-called
 anonymous functions or lambda expressions. Below the successor function is defined in two differnt ways
+
 \begin{verbatim}
 >>> def succ(x) :
 ...   return x+1
@@ -228,6 +230,7 @@ We can implement this kind of function both in Python and GF.
 \begin{exercise}
   Implement a function that takes a string of a noun and generates the regular noun paradigm for English as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types
 \end{exercise}
+
 \subsection{Smart paradigms in GF}
 
 \lstinputlisting[language=gf]{src/SmartParadigm.gf}
@@ -236,5 +239,6 @@ We can implement this kind of function both in Python and GF.
 \item compile-time vs. run-time strings
 \item ...
 \end{itemize}
+\section{The GF-Python API}
 
 \end{document}
