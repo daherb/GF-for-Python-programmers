@@ -39,6 +39,12 @@
 \begin{frame}
   \maketitle
 \end{frame}
+\begin{frame}[fragile]{Public Service Announcement}
+  Join the GF IRC Channel \#gf on Freenode
+
+  You can use the Freenode Webclient
+  \url{https://webchat.freenode.net/}
+\end{frame}
 \begin{frame}{Disclaimer}
   \begin{itemize}
   \item This tutorial is work in progress, you are the first ones to enjoy(?!?) this
@@ -130,6 +136,12 @@
 >>> mann[Number.Sg][Case.Gen]
 'Mannes'
 \end{verbatim}
+\end{frame}
+
+\begin{frame}
+  \begin{exercise}
+    Write a function that replaces all vowels with the corresponding umlaut
+  \end{exercise}
 \end{frame}
 
 \begin{frame}
@@ -269,7 +281,7 @@ import pgf
 \begin{verbatim}
 gr = pgf.readPGF("Foods.pgf")
 \end{verbatim}
-\item Parse sentence: Parsing is a funtion in the concrete syntax
+\item Parse sentence: Parsing is a function in the concrete syntax
 \begin{verbatim}
 eng = gr.languages["FoodsEng"]
 i = eng.parse("this Italian pizza is very Italian")
@@ -289,5 +301,11 @@ print(eng.linearize(e))
   \begin{exercise}
     If you have the Python module installed, try to load a grammar, parse a few sentences, generate a few trees, linearize trees, etc.
   \end{exercise}
+\end{frame}
+
+\begin{frame}
+  Check out Universal Dependencies!!!
+
+  If you want to know more wait for the next week or talk to Prasanth
 \end{frame}
 \end{document}
