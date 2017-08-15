@@ -1,5 +1,6 @@
 \documentclass{beamer}
 
+\usepackage[english,german]{babel}
 \usepackage{iftex}
 % Pakete u.a. für die Darstellung von Umlauten/Sonderzeichen
 \ifPDFTeX
@@ -72,7 +73,7 @@
  \begin{exercise}
    Fire up your Python shell and have a look at the types of some expressions.
 
-   You can try 3, 3.0, ``Foo'', [1,2,3], (1,2,3), {'foo':1,'bar':2}, some defined variables, functions and lots of other things.
+   You can try 3, 3.0, ``Foo'', [1,2,3], (1,2,3), \{'foo':1,'bar':2\}, some defined variables, functions and lots of other things.
  \end{exercise}
 \end{frame}
 \begin{frame}{Types in Python 2}
@@ -140,14 +141,11 @@
 
 \begin{frame}
   \begin{exercise}
+Implement a function that takes a string of a noun and generates noun paradigms for English (or a language of your choice) as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types
+  \end{exercise}
+  \begin{exercise}
     Write a function that replaces all vowels with the corresponding umlaut
   \end{exercise}
-\end{frame}
-
-\begin{frame}
-  \begin{exercise}
-Implement a function that takes a string of a noun and generates noun paradigms for English (or a language of your choice) as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types
-\end{exercise}
 \end{frame}
 \begin{frame}[fragile]{Functions in Python}
   \begin{itemize}
@@ -173,14 +171,14 @@ Implement a function that takes a string of a noun and generates noun paradigms 
   \begin{exercise}
     Write some functions both as ``def''s and lambda expressions and try them on some parameters.
 
-    You can try e.g. functions on strings.
+    You can try e.g. functions on strings like the function that puts a suffix onto a string.
   \end{exercise}
 \end{frame}
 
 \begin{frame}{Types in GF}
   Different types in abstract, concrete and resource modules:
   \begin{itemize}
-  \item in abstract no types in the programming language sense, you can just see it as a kind of context free grammar with grammatical categories and syntax rules
+  \item in abstract you can just see it as a kind of context free grammar with grammatical categories and syntax rules or as function types for the concrete syntax
   \item in resource modules we can use lots of types we already know from other languages
   \item in concrete syntax we can mostly focus on string tuples, records, tables and parametric types
   \end{itemize}
@@ -193,7 +191,8 @@ abstract Simple = {
     sent : NP -> VP -> S ;
 }
   \end{lstlisting}
-  Here we can read it as a grammar with the three non-terminal symbols S, NP and VP and the one grammar rule equivalent to the CFG rule \texttt{S --> NP VP}
+  We can read it as a grammar with the three non-terminal symbols S, NP and VP and the one grammar rule equivalent to the CFG rule \texttt{S --> NP VP}
+  or a function that takes two arguments, one of type NP and one of type VP and returns something of type S. What exactly this function does and what the parameters look like does not matter at the moment.
 \end{frame}
 \begin{frame}[fragile]
 \lstinputlisting[language=gf]{../../src/SimpleTypes.gf}  
@@ -210,12 +209,24 @@ abstract Simple = {
 \end{verbatim}
 \end{frame}
 
+\begin{frame}[fragile]{Parametric types}
+  Parametric types can be seen as the GF equivalent of enumeration types. They have finite values that have to be enumerable (explicitly or implicitly)
+\begin{lstlisting}
+  resource Res = {
+    param
+    Number = Sg | Pl ;
+    Gender = Fem | Masc | Neutr ;
+    Agr = Ag Gender Number ;
+}
+\end{lstlisting}
+The last one, the agreement on gender and number, implicitly lists all combinations of Number and Gender, e.g. Ag Sg Fem, Ag Sg Masc, Ag Sg Neutr, Ag Pl Fem, ...
+\end{frame}
+
 \begin{frame}{Tables and Records}
   \begin{itemize}
-  \item GF knows both Tables and Records
-  \item In Python both could be replaced with dictionaries (even there are also named tuples in Python)
-  \item Tables are like the dictionaries where we used Enums as keys
-  \item Records are like the dictionaries where we used strings as keys 
+  \item GF has two different concepts, Tables and Records. In Python both could be replaced with dictionaries (even there are also named tuples in Python)
+  \item Tables are like the dictionaries where we used Enums as keys. The operator \texttt{!} is used to select a value from a table
+  \item Records are like the dictionaries where we used strings as keys. The operator \texttt{.} is used to select a value from a table 
   \end{itemize}
 \end{frame}
 
@@ -237,6 +248,31 @@ KeyError: <Case.Gen: 2>
 \end{verbatim}
 GF does not allow that to happen. Tables have to be ``total'', i.e. there must be a mapping for all possible values (but we can use wildcards)
 \end{frame}
+
+\begin{frame}[fragile]
+  \begin{lstlisting}
+resource Res = {
+  param
+    Gender = Fem | Masc | Neutr ;
+    Number = Sg | Pl ;
+    Case = Nom | Gen | Dat | Acc ;
+  mann : { s : Number => Case => Str ; g : Gender } ;
+  mann = {
+    s = table { Sg => table { Nom => "Mann" ;
+                              Gen => "Mannes" ;
+                              Dat => "Mann" ;
+                              Acc => "Mann" } ;
+                Pl => table { Nom => "Männer" ;
+                              Gen => "Männer" ;
+                              Dat => "Männern" ;
+                              Acc => "Männer" }
+              } ;
+    g = Masc
+  }
+    
+  \end{lstlisting}
+\end{frame}
+
 \begin{frame}{Pattern matching}
   It is cool magic available in several programming languages but in python you need 3rd party modules
 
@@ -267,8 +303,18 @@ resource Res = {
 
 \begin{frame}
   \begin{exercise}
-    Write your own small smart paradigm. As an inspiration you can take the following German noun phrase
+    Write your own small smart paradigm. As an inspiration you can take the following German noun phrases
   \end{exercise}
+    \begin{tabular}{llll}
+      Nom & Sg & der junge Mann     & die junge Frau \\
+      Gen & Sg & des jungen Mannes  & der jungen Frau \\
+      Dat & Sg & dem jungen Mann    & der jungen Frau \\
+      Acc & Sg & den jungen Mann    & die junge Frau \\
+      Nom & Pl & die jungen Männer  & die jungen Frauen \\
+      Gen & Pl & der jungen Männer  & der jungen Frauen \\
+      Dat & Pl & den jungen Männern & den jungen Frauen \\
+      Acc & Pl & die jungen Männer  & die jungen Frauen \\
+    \end{tabular}
 \end{frame}
 
 \begin{frame}[fragile]{GF in Python}
