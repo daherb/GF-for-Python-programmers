@@ -9,7 +9,7 @@ class Case(Enum):
     Dat = 3
     Acc = 4
 
-def smartNoun(n) :
+def smartNoun(mann) :
     nomPl = (mann.replace('a','ä')
                  .replace('o','ö')
                  .replace('u','ü') + "er")
