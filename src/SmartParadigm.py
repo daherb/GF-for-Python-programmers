@@ -10,9 +10,9 @@ class Case(Enum):
     Acc = 4
 
 def smartNoun(n) :
-    nomPl = (mann.replace('a','a')
-                 .replace('o','o')
-                 .replace('u','u') + "er")
+    nomPl = (mann.replace('a','ä')
+                 .replace('o','ö')
+                 .replace('u','ü') + "er")
     return {
         Number.Sg: {
             Case.Nom: mann,
