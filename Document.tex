@@ -47,7 +47,10 @@
 
 This short tutorial aims for Python programmers who would like to learn how to use the Grammatical Framework. It tries to meet you in familiar terrain and take you gently over to the way GF works.
 \section{Types}
-\subsection{Dynamic typing in Python}
+
+\subsection{Types in Python}
+
+As a Python programmer you usually don't think too much about types. Unfortunately in GF types much more important.
 
 Basic types in Python consist of Strings and Numbers (Integer, Float, Complex). A special case are boolean (logical expression) that will be explained later.
 You can ask Python to give you the type for expressions. These types are automatically inferred, we don't even have to help Python to figure out what type
@@ -69,7 +72,7 @@ a variable has, as can be seen in the last example below.
 
 These basic types can be used as the form compound types. Compound types are among others Lists, Tuples and Dictionaries.
 These again can be part of other compound types as well, e.g. list containing lists as elements. Python does not really enforce
-that all elements of a list have the same type (!) as you can see in the examples. To access elements in compound objects we
+that all elements of a list have the same type (Disclaimer: In Python 3.5 they introduces strict typing and type annotations to solve that problem)\footnote{\url{https://docs.python.org/3/library/typing.html}} as you can see in the examples. To access elements in compound objects we
 can use the \texttt{[]} operator.
 
 \begin{verbatim}
@@ -107,7 +110,7 @@ The values considered \textbf{false} are:
 
 Everything else is considered \textbf{true}.
 
-Another interesting group of datatypes are enumeration types where you define a type by listing all possible values. In Python enumerable types are objects of class \texttt{enum}. Every value is mapped to a natural number. They can also be used as keys in dictionary. That gives us a way to express a mapping from grammatical number and case to a word form for german nouns.
+Another interesting group of datatypes are enumeration types where you define a type by listing all possible values. In Python enumerable types are objects of class \texttt{enum}. They can also be used as keys in dictionary. That gives us a way to express a mapping from grammatical number and case to a word form for german nouns.
 
 \begin{verbatim}
 >> class Number(Enum):
@@ -211,7 +214,7 @@ Prelude.False
 
 In GF we also have ways to compose types to create new types. These compound types are called tables, records and function types.
 
-Both tables and records can be seen as special forms of dictionaries. Tables are mappings from grammatical features to other values. A simple example are inflection tables that map e.g. from gender and number to the correct word form.
+Both tables and records can be seen as special forms of dictionaries. Tables are mappings from grammatical features to other values. A simple example are inflection tables that map e.g. from gender and number to the correct word form. Records usually are used to keep subparts of phrases as well as inherent grammatical features like the gender in nouns.
 
 The main difference is that values in tables all have to have the same type while records can contain values of different types.
 
@@ -260,6 +263,8 @@ We can implement this kind of function both in Python and GF.
 \end{exercise}
 
 \subsection{Smart paradigms in GF}
+
+\note{pattern matching}
 
 \lstinputlisting[language=gf]{src/SmartParadigm.gf}
 \section{Other problems}
