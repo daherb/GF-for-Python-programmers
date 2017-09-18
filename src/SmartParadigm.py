@@ -8,30 +8,22 @@ class Case(Enum):
     Gen = 2 
     Dat = 3
     Acc = 4
-def smartNoun(n) :
-  nomSg = n
-  genSg = n + "s"
-  datSg = n
-  accSg = n
-  nomPl = umlaut(n) + "er"
-  genPl = nomPl
-  datPl = nomPl + "n"
-  accPl = nomPl
-  return {
-      Number.Sg: {
-          Case.Nom: nomSg,
-          Case.Gen: genSg,
-          Case.Dat: datSg,
-          Case.Acc: accSg
+
+def smartNoun(mann) :
+    nomPl = (mann.replace('a','ä')
+                 .replace('o','ö')
+                 .replace('u','ü') + "er")
+    return {
+        Number.Sg: {
+            Case.Nom: mann,
+            Case.Gen: mann + "s",
+            Case.Dat: mann,
+            Case.Acc: mann
       },
       Number.Pl: {
           Case.Nom: nomPl,
-          Case.Gen: genPl,
-          Case.Dat: datPl,
-          Case.Acc: accPl
+          Case.Gen: nomPl,
+          Case.Dat: nomPl + "n",
+          Case.Acc: nomPl
       }
-  }
-
-def umlaut_fp(s) : return ''.join(list(map((lambda x: 'ä' if x == 'a' else x ),s)))
-        
-def umlaut_lss(s) : return ['ä' if x == 'a' else 'ö' if x == 'o' else 'ü' if x == 'u' else x for x in s]  
+    }
