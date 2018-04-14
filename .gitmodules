@@ -1,0 +1,3 @@
+[submodule "pandoc-include"]
+	path = pandoc-include
+	url = https://github.com/daherb/pandoc-include
