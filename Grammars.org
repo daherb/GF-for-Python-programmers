@@ -1,0 +1,9 @@
+* Grammars
+
+*** Smart Paradigms
+- Pattern matching
+
+- Example: src/SmartParadigm.gf
+
+*** Abstract Syntax
+*** Concrete Syntax

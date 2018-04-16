@@ -1,0 +1,43 @@
+* Types
+- GF is statically typed:
+  You cannot say something like
+  ...
+  a = 3 ;
+  a = "Foo" ;
+  ...
+- GF makes a distinction into abstract syntax/concrete syntax as well as resource modules
+
+*** Basic types
+- GF also support some basic types
+  - Python has strings (called `str`). GF has strings (called `Str`).
+  - Python has integers (called `int`). GF has integers (called `Int`).
+  - Python has floating-point numbers (called `float`). GF's are called `Float`.
+- These types can be used in resource modules and concrete syntax files
+- Strings vs. String tuples
+- Example: 
+  #+INCLUDE: "src/SimpleTypes.gf" src gf
+  
+*** Enumeration types
+- The only kind of enumeration types in GF are the so-called *param*
+
+- Example: 
+  #+INCLUDE: "src/Param.gf" src gf
+
+*** Compound types
+- GF has three kinds of compound types, tables, records and tuples, Python has dictionaries, tuples and lists
+- GF does not really have lists
+- Keys in tables usually are *param*s and keys in records are literal identifier
+
+- Example: 
+  #+INCLUDE: "src/Compound.gf" src gf
+
+- To select values from tables the *!* operator is used, to select from records the *.* operator
+- Tuples are special cases of records
+
+*** Functions
+- GF supports both regular functions and anonymous functions
+
+- Example: 
+  #+INCLUDE: "src/Functions.gf" src gf
+
+
