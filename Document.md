@@ -5,12 +5,16 @@ By the end of this tutorial you won't know all of GF, but you will be able to co
 
 ## Types
 
+(Data-)Types are a more important part in some programming languages than in other languages. Sometimes you have to state for each variable what values you should be allowed to save in, other languages like Python are more liberal
+about it. Variables can change their type, i.e. the kind of values they can keep, and only the current value defines in what context they can be used.
 
 ### Types in Python
 
 As a Python programmer you usually don't think too much about types. Unfortunately in GF types much more important. Python is, [by default](https://medium.com/@ageitgey/learn-how-to-use-static-type-checking-in-python-3-6-in-10-minutes-12c86d72677b), dynamically typed. GF is statically typed. So we'll start by going over Python's type system, and relate that to GF's type system.
 
 ### Dynamic typing in Python
+
+#### Basic types
 
 Basic types in Python consist of Strings and Numbers (Integer, Float, Complex). A special case are boolean (logical expression) that will be explained later.
 You can ask Python to give you the type for expressions. These types are automatically inferred -- we don't have to tell Python what type
@@ -28,7 +32,31 @@ a variable has, as can be seen in the last example below.
 >>> a=3
 >>> type(a)
 <class 'int'>
+>>> a="Foo"
+>>> type(a)
 ```
+
+A special case: Boolean values. Python's Boolean *datatype* simply uses 1 for True and 0 for False:
+
+```python
+>>> True + True
+2
+```
+
+Python interprets values of other types as truthy or falsy values:
+
+The values considered **false** are: 
+
+* `None` i.e. the empty object
+* `False` i.e. the logical constant
+* `zero` of any numeric type, e.g. `0`, `0.0`, `0j`.
+* any empty sequence, e.g. `''`, `()`, `[]`, i.e. empty string, tuple, or list.
+* any empty mapping, for example, `{}`.
+* instances of user-defined classes, if the class defines a `__bool__()` or `__len__()` method, when that method returns the integer zero or bool value False.
+
+Everything else is considered **true**.
+
+#### Compound types
 
 These basic types can be used in compound types. Compound types are among others Lists, Tuples and Dictionaries.
 These again can be part of other compound types as well, e.g. list containing lists as elements. Python does not really enforce
@@ -56,31 +84,18 @@ can use the `[]` operator.
 <class 'dict'>
 ```
 
-A special case: Boolean values. Python's Boolean *datatype* simply uses 1 for True and 0 for False:
-
-```
->>> True + True
-2
-```
-
-Python interprets values of other types as truthy or falsy values:
-
-The values considered **false** are: 
-
-* `None` i.e. the empty object
-* `False` i.e. the logical constant
-* `zero` of any numeric type, e.g. `0`, `0.0`, `0j`.
-* any empty sequence, e.g. `''`, `()`, `[]`, i.e. empty string, tuple, or list.
-* any empty mapping, for example, `{}`.
-* instances of user-defined classes, if the class defines a `__bool__()` or `__len__()` method, when that method returns the integer zero or bool value False.
-
-Everything else is considered **true**.
-
 Another interesting group of datatypes are enumeration types where you define a type by listing all possible values. In Python enumerable types are objects of class `enum`. They can also be used as keys in dictionary. That gives us a way to express a mapping from grammatical number and case to a word form for german nouns.
+
+##### Exercise
+
+> If you haven't done so before, try the type() function in Python on different values and compare the output. 
+
+#### Enumeration types
 
 Enumeration types are useful in linguistics to represent inflection: languages inflect words by gender, case, number, tense, and so on. We can set up a variety of enum classes for each inflection.
 
 ```python
+>> from enum import Enum
 >> class Number(Enum):
 ...   Sg = 1 # singular
 ...   Pl = 2 # plural
@@ -114,9 +129,6 @@ Dictionary keys can be numbers, and enums are numbers. So enums can be used as d
 
 Other languages might call this data structure a hash, or a map, or an associative array, or a record. Python calls it a dictionary. Linguists also call it a dictionary. Isn't that nice?
 
-#### Exercise
-> If you haven't done so before, try the type() function in Python on different values and compare the output. 
-
 One problem with this approach is that Python does not enforce that we define mappings for all possible values. This can easily lead to errors. In the next example we only define values for some of the keys and then try to access undefined values which leads to an error.
 
 ```
@@ -136,6 +148,12 @@ KeyError: <Case.Gen: 2>
 
 An aside: a mathematician would say that this abbreviated dictionary represents a partial function, as opposed to a total function, and the error here is due to the lack of totality. The mathematician thinks of the dictionary as a function in the sense that it maps input (grammatical number and case) to output (a German word).
 
+##### Exercise
+
+> Define a few lexical items for a language of your choice
+
+#### Functions
+
 So that brings us to actual Python functions. Functions in Python are usually defined and given a name with the `def` keyword. But Python also supports so-called anonymous functions or lambda expressions. Below the successor function is expressed in three different ways.
 
 ```
@@ -144,6 +162,7 @@ So that brings us to actual Python functions. Functions in Python are usually de
 ...   return x+1
 ... 
 >>> type(succ1)
+<class 'function'>
 
 # 2. The variable succ2 contains a lambda function.
 >>> succ2 = lambda x : x+1
@@ -168,8 +187,6 @@ Python has integers (called `int`). GF has integers (called `Int`).
 Python has floating-point numbers (called `float`). GF's are called `Float`.
 
 Python has dicts (of the form `{ 'foo': 123 }`). GF has records (of the form `{ foo: 123}`). You get the 123 out of a Python dict by saying `{'foo':123}['foo']`. You get the 123 out of a GF record by saying `{ foo:123 }.foo`.
-
-% TODO: fix quotes to be single ' straight
 
 How do you explicitly tell Python, or GF, for that matter, about types?
 
@@ -216,12 +233,29 @@ In the abstract syntax we do not really have to care about types. Here we think 
 
 So we will start our examination of GF types by looking at resource modules. Here we can use all the different types available in GF. These include Token lists (a.k.a. arrays of Str), Integers, Floats, and Bool. Most of them are defined in a module called Predef but Bool is defined in the module Prelude. Anonymous function types (lambdas) are standard types in GF. In resource modules, functions are defined as lambdas. (In practice, two equivalent syntaxes are available, just as, in the Python examples above, succ1 and succ2 are equivalent.)
 
-lstinputlisting[language=gf]{src/SimpleTypes.gf}
+[src/SimpleTypes.gf](src/SimpleTypes.gf)
 
 ``` {.include .haskell}
 src/SimpleTypes.gf
 ```
 
+[src/Params.gf](src/Params.gf)
+
+``` {.include .haskell}
+src/SimpleTypes.gf
+```
+
+[src/Compounds.gf](src/Compounds.gf)
+
+``` {.include .haskell}
+src/Compounds.gf
+```
+
+[src/Functions.gf](src/Functions.gf)
+
+``` {.include .haskell}
+src/Functions.gf
+```
 
 As you can see in the examples above, for each variable we first give the type. That is best practice but in simple cases not necessary because GF can infer the type automatically. The only case where the type must be given is the function. But it is good discipline to annotate your types: it is like brushing your teeth.
 
@@ -373,7 +407,11 @@ In GF, that looks like: `myfun arg1 arg2`. The syntax descends from the mathemat
 
 To consolidate, let's look at some examples.
 
-\lstinputlisting[language=gf]{src/Comparison.gf}
+[src/Comparison.gf](src/Comparison.gf)
+
+``` {.include .haskell}
+src/Comparison.gf
+```
 
 A syntax note: unlike Python, every statement in GF has to be terminated with a `;` (semicolon). Semicolons are also used as record and table separators. In Python the separator is a comma, not a semicolon.
 
@@ -437,7 +475,8 @@ src/NLTK-CF2.py
 src/NLTK-CF3.py
 ```
 
-#### Exercise
+##### Exercise
+
 >  Write a context-free grammar accounting for the following sentences in Italian:
 >
 >  Il mio hovercraft è pieno di anguille
@@ -467,7 +506,8 @@ src/GF-CF2.cf
 src/GF-CF3.cf
 ```
 
-#### Exercise
+##### Exercise
+
 >  Write the same grammar from the previous task in GF. Generate all trees accounted for by the grammar. Can you guess how many trees will be
 >  generated from a grammar?
 
@@ -481,14 +521,23 @@ We can implement this kind of function both in Python and GF.
 
 #### Smart paradigms in Python
 
-#### Exercise
+An example for a smart paradigm is the following function for German nouns
+
+``` {.include .haskell}
+src/SmartParadigm.py
+```
+
+##### Exercise
+
 > Implement a function that takes a string of a noun and generates the regular noun paradigm for English as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types
+
 
 #### Smart paradigms in GF
 
-TODO: pattern matching
+``` {.include .haskell}
+src/SmartParadigm.gf
+```
 
-\lstinputlisting[language=gf]{src/SmartParadigm.gf}
 ## Other problems
 
 * compile-time vs. run-time strings
