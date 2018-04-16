@@ -1,9 +1,20 @@
 * Grammars
 
 *** Smart Paradigms
-- Pattern matching
+- Case statements and Pattern matching
+  - In Python
+    if a == '1':
+       print('1a')
+    elif a == '2':
+       print('2a')
+    else:
+       print('3a')
+  - In GF
 
-- Example: src/SmartParadigm.gf
+- Example: 
+  #+INCLUDE "src/SmartParadigm.gf" src gf
 
 *** Abstract Syntax
+- To be done
 *** Concrete Syntax
+- To be done

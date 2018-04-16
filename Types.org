@@ -14,11 +14,13 @@
   - Python has floating-point numbers (called `float`). GF's are called `Float`.
 - These types can be used in resource modules and concrete syntax files
 - Strings vs. String tuples
+  - Substrings can be concatenated with *+*
+  - Sentences in GF are kind of lists of strings, *++* concatenates lists of strings
 - Example: 
   #+INCLUDE: "src/SimpleTypes.gf" src gf
   
 *** Enumeration types
-- The only kind of enumeration types in GF are the so-called *param*
+- The only kind of enumeration types in GF are the so-called *param* types
 
 - Example: 
   #+INCLUDE: "src/Param.gf" src gf
