@@ -1,4 +1,4 @@
-resource Functions = {
+resource Functions = open Prelude,Predef in {
   oper
     succ : Int -> Int; -- Declaration
     succ i = plus i 1 ; -- Definition
