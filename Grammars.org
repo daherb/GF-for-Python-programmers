@@ -15,6 +15,8 @@
   #+INCLUDE "src/SmartParadigm.gf" src gf
 
 *** Abstract Syntax
-- To be done
+Example:
+#+INCLUDE "src/Micro.gf" src gf
 *** Concrete Syntax
-- To be done
+Example:
+#+INCLUDE "src/MicroEng.gf" src gf
