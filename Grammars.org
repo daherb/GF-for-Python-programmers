@@ -10,7 +10,8 @@
     else:
        print('3a')
   - In GF
-
+    Example: 
+    #+INCLUDE "src/Case.gf" src gf
 - Example: 
   #+INCLUDE "src/SmartParadigm.gf" src gf
 
