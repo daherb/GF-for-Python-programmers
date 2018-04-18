@@ -514,12 +514,14 @@ def smartNoun(mann) <span class="fu">:</span>
 <p>Implement a function that takes a string of a noun and generates the regular noun paradigm for English as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types</p>
 </blockquote>
 <h4 id="smart-paradigms-in-gf">Smart paradigms in GF</h4>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">resource <span class="dt">SmartParadigm</span> <span class="fu">=</span> {
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="fu">--#</span> <span class="fu">-</span>coding<span class="fu">=</span>utf8
+resource <span class="dt">SmartParadigm</span> <span class="fu">=</span> {
+  
   param <span class="dt">Case</span> <span class="fu">=</span> <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Gen</span> <span class="fu">|</span> <span class="dt">Dat</span> <span class="fu">|</span> <span class="dt">Acc</span> ;
   param <span class="dt">Number</span> <span class="fu">=</span> <span class="dt">Sg</span> <span class="fu">|</span> <span class="dt">Pl</span> ;
   oper
     <span class="dt">Noun</span> <span class="fu">:</span> <span class="dt">Type</span> <span class="fu">=</span> { s <span class="fu">:</span> <span class="dt">Number</span> <span class="ot">=&gt;</span> <span class="dt">Case</span> <span class="ot">=&gt;</span> <span class="dt">Str</span> } ;
-    smartNoun <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Noun</span> <span class="fu">=</span> \n <span class="ot">-&gt;</span>
+    regNoun <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Noun</span> <span class="fu">=</span> \n <span class="ot">-&gt;</span>
       <span class="kw">let</span> um <span class="fu">=</span> umlaut n <span class="kw">in</span>
       { s <span class="fu">=</span> table <span class="dt">Number</span> { <span class="dt">Sg</span> <span class="ot">=&gt;</span>
 			     table <span class="dt">Case</span> {
