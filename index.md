@@ -6,6 +6,6 @@ As additional material there are Jupyter notebooks [Types.ipynb](Types.ipynb) an
 and more material about GF [Types](Types.html) and [Grammars](Grammars.html)
 
 You can use binder to run the Python notebooks:
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/daherb/GF-for-Python-programmers)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/daherb/GF-for-Python-programmers/master)
 
 The source is available [here](https://github.com/daherbGF-for-Python-programmers/)
