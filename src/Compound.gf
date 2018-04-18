@@ -17,7 +17,7 @@ resource Compound = Param ** {
 	Pl => table {
 	  P1 => "sleep" ;
 	  P2 => "sleep" ;
-	  P3 => "sleep"
+	  P3 => "sleep" 
 	  }
       };
     theSg : { s : Str ; n : Number } = -- Declaration
@@ -31,7 +31,9 @@ resource Compound = Param ** {
 	      Dat => "man" ;
 	      Acc => "man"
 	      } ;
-	    Pl => table { _ => "men" } 
+	    Pl => table {
+	      Gen => "men's" ;
+	      _ => "men" } 
 	    } ;
 	  g = M
       } ;
