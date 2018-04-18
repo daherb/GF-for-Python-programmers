@@ -8,4 +8,4 @@ and more material about GF [Types](Types.html) and [Grammars](Grammars.html)
 You can use binder to run the Python notebooks:
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/daherb/GF-for-Python-programmers)
 
-The source is available [here](https://github.com/daherbGF-for-Python-programmers/)
+The source is available [here](https://github.com/daherb/GF-for-Python-programmers/)
