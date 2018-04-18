@@ -7,6 +7,8 @@ There is a tradition in programming of "X as a second language for native speake
 
 This tutorial is "GF as a second language for native speakers of Python".
 
+You can read it [online](https://daherb.github.io/GF-for-Python-programmers/)
+
 ![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/daherb/GF-for-Python-programmers/markdown)
