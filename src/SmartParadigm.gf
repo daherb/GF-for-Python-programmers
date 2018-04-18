@@ -1,9 +1,11 @@
+--# -coding=utf8
 resource SmartParadigm = {
+  
   param Case = Nom | Gen | Dat | Acc ;
   param Number = Sg | Pl ;
   oper
     Noun : Type = { s : Number => Case => Str } ;
-    smartNoun : Str -> Noun = \n ->
+    regNoun : Str -> Noun = \n ->
       let um = umlaut n in
       { s = table Number { Sg =>
 			     table Case {
