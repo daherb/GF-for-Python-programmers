@@ -1,6 +1,6 @@
 In this project you find resources about learning GF if you already know Python.
 
-It is primarily a [tutorial](Document.html)
+It is primarily a [tutorial](Tutorial.html)
 
 As additional material there are Jupyter notebooks [Types.ipynb](Types.ipynb) and [Grammars.ipynb](Grammars.ipynb)
 and more material about GF [Types](Types.html) and [Grammars](Grammars.html)
