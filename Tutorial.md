@@ -457,8 +457,44 @@ In the last kind of modules (we want to look at here) are concrete modules. Here
 % TODO: talk about param Thing : One | Two | Three; 
 -->
 
+## Lists
 
-## Context-free Grammars
+As a Python programmar you most likely encountered lists. They are a handy data structure that can store lots of different types of data. We have seen some examples about lists
+in Python before. GF also offers (very limited) support for lists. But first have a look at lists in Python and general.
+
+In Python, as we have seen before, lists are a sequence of values of potentially different types. However, most often all values in a list have the same type. There are many built-in
+funcions that work on list. To construct a list in Python we can either create it by listing all its elements explicitely or by starting with the empty list `[]` and `append`ing elements
+at the end. To deconstruct the list, we can `pop` elements from the back of the list. In LISP-speak that makes it a SNOC list (that is spelled CONS backwards, the LISP way of constructing lists).
+One important thing to remember about Python lists is, that it is possible to completely deconstruct a list that has been constructed before.
+
+In GF we can also have lists, e.g. as list categories. They can be used to model conjunction of several constituents. If we have the category `S` we can also define the category `ListS` which models a list of `S` elements. To construct this list, we need two operations, `BaseS` to generate a list of category `S` and the LISPy operation `ConsS` that takes an element of category `S` and a list of categpory `S` and extends the list by one element of this categroy. This all might sound a little vague, so let's have a look at a simple example, a list of digits. The grammars are the following:
+
+``` {.include .haskell}
+src/ListAbs.gf
+```
+
+``` {.include .haskell}
+src/List.gf
+```
+
+With these grammars we can generate random sequences of digits separated by spaces. You may notice that in the concrete syntax we just say that both Digit and ListDigit have the concrete type `Str`. That might seem weird but works for the moment, we will go more into detail about this in a moment. But what if we want to put commas in between instead? If we just write `ConsDigit d ds = d ++ "," ++ ds ;` instead of `ConsDigit d ds = d ++  ds ;`, we will see, that commas appear also at the end of the list. Is there a way we can avoid this? In defined the base case `BaseDigit` just as the empty string. In the CONS we then concatenate the new digit and a comma in front of the previous list, which can be empty. To avoid this we might want to have a different base case which requires that a list consists of at least one element. We can see the necessary changes in these grammars:
+
+``` {.include .haskell}
+src/List2Abs.gf
+```
+
+``` {.include .haskell}
+src/List2.gf
+```
+
+This solves our problem with the commas. Probably we can come up with use cases where the base list should have at least n elements, for example in natural languages the conjunction of constituents requires at least two elements.
+
+At some point it becomes tedious to define the list categories and the corresponding `BaseC` and `ConsC` functions in the abstract syntax. For that reason GF provides some syntactic sugar for creating list categories. Instead of `ListC` we can write in a very Haskell-like style `[C]` to create a list category for category `C`. This adds some additional magic which also creates the abstract definition of `BaseC` and `ConsC` without explicitely mentioning it. To provide the flexibility about the base case we discussed before we can even write `[C]{n}` which means the function `BaseC` is definied in the following way `BaseC : C -> ... -> in total n times -> ... -> C -> ListC`. With this trick we can redefine the grammar `List3Abs` the following way:
+
+``` {.include .haskell}
+src/List3Abs.gf
+```
+
 
 # Context-free Grammars
 
