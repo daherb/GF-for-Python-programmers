@@ -494,7 +494,34 @@ At some point it becomes tedious to define the list categories and the correspon
 ``` {.include .haskell}
 src/List3Abs.gf
 ```
+ 
+ But what if we want to add a function `head : ListDigit -> Digit` which gives us the first element of a list? Currently we are unable to do that because behind the scenes we are just concatenating strings. And we know that this operation is not reversible. Our problem is, that only on the surface, i.e. in the abstract syntax, the list categories look roughly like lists as we can find them in other programming languages as well. In the concrete syntax we can decide for ourselves how we want to treat lists with the tools and types GF provides. 
+ 
+ Back to our `head` function. To be able to implement it, we need to remember which element is at the front of the list. The usual approach to remember things in GF is by using records and introduce additional record fields. So let us implement a list where the base case is the empty list, i.e. the empty string, `ConsS` attaches the element in the front and we will have a `head` function to give us the last element added to the list or the empty string if the list is empty. The result is the following:
+ 
+``` {.include .haskell}
+src/List4Abs.gf
+```
 
+``` {.include .haskell}
+src/List4.gf
+```
+ 
+ Instead of just a string we have two record fields. The first (`hd`) holds the head of the list, i.e. the first element, the second one (`tl`) hold the tail, the rest of the list. When we add an element to the list, we concatenate the old head with the old tail and replace the head with the new element. This way of storing the information works great for the `head` function. But could we also implement a function `tail : [Digit] -> [Digit]` that for some list returns the list without the first element? The answer at the moment is no. We would have to split off the first element of `tl` to get the new head of the resulting list. And we already talked about the fact that it is impossible to split the string here.
+ 
+ That shows that lists in GF are rather limited compared to other programming languages, but that does not make them useless. In most use cases of GF we don't need the full power of lists. For example if we want to introduce conjunctions between our digits, the result in English would be for example something like "1, 2 and 3" or "23, 42 or 5". That means we do not have to take apart the list, instead we only need a gap between the next to last and the last element to put the conjunction in. That means the list should be pretty similar to what we just did.
+ 
+``` {.include .haskell}
+src/List5Abs.gf
+```
+
+``` {.include .haskell}
+src/List5.gf
+```
+ 
+The list we had in the previous example was kind of a classical CONS list, i.e. we start with an empty list and add elements in the front. Now we have a SNOC list again, a list where we add elements in the end. Also for the lists we want to use with conjunctions it does not make sense to have less than two elements, e.g. "and 3" or "42 or" are both not really well-formed and complete statements. For that reason we use the `[C]{n}` syntax again to ask the base case to have two parameters. As a result the shortest lists we can have have at least two elements. When we add elements to the list, we put a comma between the previous list and the previous last element. This is in many languages the expected behaviour, that in longer coordinating expressions we only have the conjunction in the end and commas in all other places.
+
+This section showed how lists in GF work compared to other programming languages but also how they still can be very useful to model natural language phenomena.
 
 # Context-free Grammars
 
