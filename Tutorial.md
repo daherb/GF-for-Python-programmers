@@ -1,4 +1,6 @@
-# Grammatical Framework for Python programmers
+---
+title: Grammatical Framework for Python programmers
+...
 
 This short tutorial is aimed at Python programmers who would like to learn how to use the Grammatical Framework. It tries to meet you in familiar terrain and take you gently over to the way GF works.
 By the end of this tutorial you won't know all of GF, but you will be able to consume the regular GF documentation with much less friction: think of this tutorial as an English speaker learning a little bit of Italian before learning Latin.

@@ -1,3 +1,7 @@
+---
+title: Index
+...
+
 In this project you find resources about learning GF if you already know Python.
 
 It is primarily a [tutorial](Tutorial.html)
