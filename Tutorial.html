@@ -473,70 +473,136 @@ Prelude.False
 <a class="sourceLine" id="cb27-6" title="6">}</a>
 <a class="sourceLine" id="cb27-7" title="7">      </a>
 <a class="sourceLine" id="cb27-8" title="8">      </a></code></pre></div>
+<p>But what if we want to add a function <code>head : ListDigit -&gt; Digit</code> which gives us the first element of a list? Currently we are unable to do that because behind the scenes we are just concatenating strings. And we know that this operation is not reversible. Our problem is, that only on the surface, i.e. in the abstract syntax, the list categories look roughly like lists as we can find them in other programming languages as well. In the concrete syntax we can decide for ourselves how we want to treat lists with the tools and types GF provides.</p>
+<p>Back to our <code>head</code> function. To be able to implement it, we need to remember which element is at the front of the list. The usual approach to remember things in GF is by using records and introduce additional record fields. So let us implement a list where the base case is the empty list, i.e. the empty string, <code>ConsS</code> attaches the element in the front and we will have a <code>head</code> function to give us the last element added to the list or the empty string if the list is empty. The result is the following:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" title="1">abstract <span class="dt">List4Abs</span> <span class="fu">=</span> {</a>
+<a class="sourceLine" id="cb28-2" title="2">  cat</a>
+<a class="sourceLine" id="cb28-3" title="3">    <span class="dt">Digit</span>; [<span class="dt">Digit</span>] ;</a>
+<a class="sourceLine" id="cb28-4" title="4">  fun</a>
+<a class="sourceLine" id="cb28-5" title="5">    one, two, three, four, five, six, seven, eight, nine, zero <span class="fu">:</span> <span class="dt">Digit</span> ;</a>
+<a class="sourceLine" id="cb28-6" title="6">    <span class="fu">head</span> <span class="fu">:</span> [<span class="dt">Digit</span>] <span class="ot">-&gt;</span> <span class="dt">Digit</span> ;</a>
+<a class="sourceLine" id="cb28-7" title="7">}</a>
+<a class="sourceLine" id="cb28-8" title="8">      </a>
+<a class="sourceLine" id="cb28-9" title="9">      </a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" title="1">concrete <span class="dt">List4</span> <span class="kw">of</span> <span class="dt">List4Abs</span> <span class="fu">=</span> {</a>
+<a class="sourceLine" id="cb29-2" title="2">  lincat</a>
+<a class="sourceLine" id="cb29-3" title="3">    <span class="dt">Digit</span> <span class="fu">=</span> <span class="dt">Str</span> ;</a>
+<a class="sourceLine" id="cb29-4" title="4">    [<span class="dt">Digit</span>] <span class="fu">=</span> { hd <span class="fu">:</span> <span class="dt">Str</span> ; tl <span class="fu">:</span> <span class="dt">Str</span> } ;</a>
+<a class="sourceLine" id="cb29-5" title="5">  lin</a>
+<a class="sourceLine" id="cb29-6" title="6">    <span class="dt">BaseDigit</span> <span class="fu">=</span> { hd <span class="fu">=</span> <span class="st">&quot;&quot;</span> ; tl <span class="fu">=</span> <span class="st">&quot;&quot;</span> } ;</a>
+<a class="sourceLine" id="cb29-7" title="7">    <span class="dt">ConsDigit</span> d ds <span class="fu">=</span> { hd <span class="fu">=</span> d ; tl <span class="fu">=</span> ds<span class="fu">.</span>hd <span class="fu">++</span> ds<span class="fu">.</span>tl };</a>
+<a class="sourceLine" id="cb29-8" title="8">    <span class="fu">head</span> ds <span class="fu">=</span> ds<span class="fu">.</span>hd ;</a>
+<a class="sourceLine" id="cb29-9" title="9">    one   <span class="fu">=</span> <span class="st">&quot;1&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-10" title="10">    two   <span class="fu">=</span> <span class="st">&quot;2&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-11" title="11">    three <span class="fu">=</span> <span class="st">&quot;3&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-12" title="12">    four  <span class="fu">=</span> <span class="st">&quot;4&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-13" title="13">    five  <span class="fu">=</span> <span class="st">&quot;5&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-14" title="14">    six   <span class="fu">=</span> <span class="st">&quot;6&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-15" title="15">    seven <span class="fu">=</span> <span class="st">&quot;7&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-16" title="16">    eight <span class="fu">=</span> <span class="st">&quot;8&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-17" title="17">    nine  <span class="fu">=</span> <span class="st">&quot;9&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-18" title="18">    zero  <span class="fu">=</span> <span class="st">&quot;0&quot;</span> ;</a>
+<a class="sourceLine" id="cb29-19" title="19">}</a></code></pre></div>
+<p>Instead of just a string we have two record fields. The first (<code>hd</code>) holds the head of the list, i.e. the first element, the second one (<code>tl</code>) hold the tail, the rest of the list. When we add an element to the list, we concatenate the old head with the old tail and replace the head with the new element. This way of storing the information works great for the <code>head</code> function. But could we also implement a function <code>tail : [Digit] -&gt; [Digit]</code> that for some list returns the list without the first element? The answer at the moment is no. We would have to split off the first element of <code>tl</code> to get the new head of the resulting list. And we already talked about the fact that it is impossible to split the string here.</p>
+<p>That shows that lists in GF are rather limited compared to other programming languages, but that does not make them useless. In most use cases of GF we don’t need the full power of lists. For example if we want to introduce conjunctions between our digits, the result in English would be for example something like “1, 2 and 3” or “23, 42 or 5”. That means we do not have to take apart the list, instead we only need a gap between the next to last and the last element to put the conjunction in. That means the list should be pretty similar to what we just did.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" title="1">abstract <span class="dt">List5Abs</span> <span class="fu">=</span> {</a>
+<a class="sourceLine" id="cb30-2" title="2">  cat</a>
+<a class="sourceLine" id="cb30-3" title="3">    <span class="dt">Digit</span>; [<span class="dt">Digit</span>]{<span class="dv">2</span>} ; <span class="dt">Conj</span> ;</a>
+<a class="sourceLine" id="cb30-4" title="4">  fun</a>
+<a class="sourceLine" id="cb30-5" title="5">    one, two, three, four, five, six, seven, eight, nine, zero <span class="fu">:</span> <span class="dt">Digit</span> ;</a>
+<a class="sourceLine" id="cb30-6" title="6">    <span class="dt">ConjDigit</span> <span class="fu">:</span> <span class="dt">Conj</span> <span class="ot">-&gt;</span> [<span class="dt">Digit</span>] <span class="ot">-&gt;</span> <span class="dt">Digit</span> ;</a>
+<a class="sourceLine" id="cb30-7" title="7">    <span class="fu">and</span> <span class="fu">:</span> <span class="dt">Conj</span> ;</a>
+<a class="sourceLine" id="cb30-8" title="8">    <span class="fu">or</span> <span class="fu">:</span> <span class="dt">Conj</span> ;</a>
+<a class="sourceLine" id="cb30-9" title="9">}</a>
+<a class="sourceLine" id="cb30-10" title="10">      </a>
+<a class="sourceLine" id="cb30-11" title="11">      </a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" title="1">concrete <span class="dt">List5</span> <span class="kw">of</span> <span class="dt">List5Abs</span> <span class="fu">=</span> {</a>
+<a class="sourceLine" id="cb31-2" title="2">  lincat</a>
+<a class="sourceLine" id="cb31-3" title="3">    <span class="dt">Digit</span>, <span class="dt">Conj</span> <span class="fu">=</span> <span class="dt">Str</span> ;</a>
+<a class="sourceLine" id="cb31-4" title="4">    [<span class="dt">Digit</span>] <span class="fu">=</span> { <span class="fu">init</span> <span class="fu">:</span> <span class="dt">Str</span> ; <span class="fu">last</span> <span class="fu">:</span> <span class="dt">Str</span> } ;</a>
+<a class="sourceLine" id="cb31-5" title="5">  lin</a>
+<a class="sourceLine" id="cb31-6" title="6">    <span class="dt">BaseDigit</span> d1 d2 <span class="fu">=</span> { <span class="fu">init</span> <span class="fu">=</span> d1 ; <span class="fu">last</span> <span class="fu">=</span> d2 } ;</a>
+<a class="sourceLine" id="cb31-7" title="7">    <span class="dt">ConsDigit</span> d ds <span class="fu">=</span> { <span class="fu">init</span> <span class="fu">=</span> ds<span class="fu">.init</span> <span class="fu">++</span> <span class="st">&quot;,&quot;</span> <span class="fu">++</span> ds<span class="fu">.last</span> ; <span class="fu">last</span> <span class="fu">=</span> d };</a>
+<a class="sourceLine" id="cb31-8" title="8">    <span class="dt">ConjDigit</span> c ds <span class="fu">=</span> ds<span class="fu">.init</span> <span class="fu">++</span> c <span class="fu">++</span> ds<span class="fu">.last</span> ;</a>
+<a class="sourceLine" id="cb31-9" title="9">    one   <span class="fu">=</span> <span class="st">&quot;1&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-10" title="10">    two   <span class="fu">=</span> <span class="st">&quot;2&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-11" title="11">    three <span class="fu">=</span> <span class="st">&quot;3&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-12" title="12">    four  <span class="fu">=</span> <span class="st">&quot;4&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-13" title="13">    five  <span class="fu">=</span> <span class="st">&quot;5&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-14" title="14">    six   <span class="fu">=</span> <span class="st">&quot;6&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-15" title="15">    seven <span class="fu">=</span> <span class="st">&quot;7&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-16" title="16">    eight <span class="fu">=</span> <span class="st">&quot;8&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-17" title="17">    nine  <span class="fu">=</span> <span class="st">&quot;9&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-18" title="18">    zero  <span class="fu">=</span> <span class="st">&quot;0&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-19" title="19">    <span class="fu">and</span> <span class="fu">=</span> <span class="st">&quot;and&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-20" title="20">    <span class="fu">or</span> <span class="fu">=</span> <span class="st">&quot;or&quot;</span> ;</a>
+<a class="sourceLine" id="cb31-21" title="21">}</a></code></pre></div>
+<p>The list we had in the previous example was kind of a classical CONS list, i.e. we start with an empty list and add elements in the front. Now we have a SNOC list again, a list where we add elements in the end. Also for the lists we want to use with conjunctions it does not make sense to have less than two elements, e.g. “and 3” or “42 or” are both not really well-formed and complete statements. For that reason we use the <code>[C]{n}</code> syntax again to ask the base case to have two parameters. As a result the shortest lists we can have have at least two elements. When we add elements to the list, we put a comma between the previous list and the previous last element. This is in many languages the expected behaviour, that in longer coordinating expressions we only have the conjunction in the end and commas in all other places.</p>
+<p>This section showed how lists in GF work compared to other programming languages but also how they still can be very useful to model natural language phenomena.</p>
 <h1 id="context-free-grammars">Context-free Grammars</h1>
 <p>A simple form of grammars are the so-called context-free grammars. They can be used in lots of applications both in computer science and linguistics but have limitations that encourage us to use more expressive formalisms like GF. We start with simple grammars in Python with NLTK, then show to translate them to a format that also works in GF and finally show how to implement them in the full GF formalism.</p>
 <h2 id="context-free-grammars-in-pythonnltk">Context-free Grammars in Python/NLTK</h2>
 <p><a href="src/NLTK-CF.py">src/NLTK-CF.py</a></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb28-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
-<a class="sourceLine" id="cb28-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="st">  S -&gt; NP VP</span></a>
-<a class="sourceLine" id="cb28-5" title="5"><span class="st">  NP -&gt; Det N</span></a>
-<a class="sourceLine" id="cb28-6" title="6"><span class="st">  VP -&gt; IV</span></a>
-<a class="sourceLine" id="cb28-7" title="7"><span class="st">  Det -&gt; 'the'</span></a>
-<a class="sourceLine" id="cb28-8" title="8"><span class="st">  N -&gt; 'man'</span></a>
-<a class="sourceLine" id="cb28-9" title="9"><span class="st">  IV -&gt; 'walks'</span></a>
-<a class="sourceLine" id="cb28-10" title="10"><span class="st">  &quot;&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb28-11" title="11"><span class="co">#&gt;&gt;&gt; grammar</span></a>
-<a class="sourceLine" id="cb28-12" title="12"><span class="co">#&lt;Grammar with 14 productions&gt;</span></a>
-<a class="sourceLine" id="cb28-13" title="13"><span class="co">#&gt;&gt;&gt; grammar.start()</span></a>
-<a class="sourceLine" id="cb28-14" title="14"><span class="co">#S</span></a>
-<a class="sourceLine" id="cb28-15" title="15"><span class="co">#&gt;&gt;&gt; grammar.productions()</span></a>
-<a class="sourceLine" id="cb28-16" title="16"><span class="co">#[S -&gt; NP VP, NP -&gt; Det N, VP -&gt; IV, Det -&gt; 'the', N -&gt; 'man', IV -&gt; 'walks']</span></a>
-<a class="sourceLine" id="cb28-17" title="17">parser <span class="op">=</span> ChartParser(grammar)</a>
-<a class="sourceLine" id="cb28-18" title="18">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walks&quot;</span>))</a>
-<a class="sourceLine" id="cb28-19" title="19"><span class="co">#&gt;&gt;&gt; parses</span></a>
-<a class="sourceLine" id="cb28-20" title="20"><span class="co">#[Tree('S', [Tree('NP', [Tree('Det', ['the']), Tree('N', ['man'])]), Tree('VP', [Tree('IV', ['walks'])])])]</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
+<a class="sourceLine" id="cb32-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="st">  S -&gt; NP VP</span></a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="st">  NP -&gt; Det N</span></a>
+<a class="sourceLine" id="cb32-6" title="6"><span class="st">  VP -&gt; IV</span></a>
+<a class="sourceLine" id="cb32-7" title="7"><span class="st">  Det -&gt; 'the'</span></a>
+<a class="sourceLine" id="cb32-8" title="8"><span class="st">  N -&gt; 'man'</span></a>
+<a class="sourceLine" id="cb32-9" title="9"><span class="st">  IV -&gt; 'walks'</span></a>
+<a class="sourceLine" id="cb32-10" title="10"><span class="st">  &quot;&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb32-11" title="11"><span class="co">#&gt;&gt;&gt; grammar</span></a>
+<a class="sourceLine" id="cb32-12" title="12"><span class="co">#&lt;Grammar with 14 productions&gt;</span></a>
+<a class="sourceLine" id="cb32-13" title="13"><span class="co">#&gt;&gt;&gt; grammar.start()</span></a>
+<a class="sourceLine" id="cb32-14" title="14"><span class="co">#S</span></a>
+<a class="sourceLine" id="cb32-15" title="15"><span class="co">#&gt;&gt;&gt; grammar.productions()</span></a>
+<a class="sourceLine" id="cb32-16" title="16"><span class="co">#[S -&gt; NP VP, NP -&gt; Det N, VP -&gt; IV, Det -&gt; 'the', N -&gt; 'man', IV -&gt; 'walks']</span></a>
+<a class="sourceLine" id="cb32-17" title="17">parser <span class="op">=</span> ChartParser(grammar)</a>
+<a class="sourceLine" id="cb32-18" title="18">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walks&quot;</span>))</a>
+<a class="sourceLine" id="cb32-19" title="19"><span class="co">#&gt;&gt;&gt; parses</span></a>
+<a class="sourceLine" id="cb32-20" title="20"><span class="co">#[Tree('S', [Tree('NP', [Tree('Det', ['the']), Tree('N', ['man'])]), Tree('VP', [Tree('IV', ['walks'])])])]</span></a></code></pre></div>
 <p><a href="src/NLTK-CF2.py">src/NLTK-CF2.py</a></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb29-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
-<a class="sourceLine" id="cb29-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
-<a class="sourceLine" id="cb29-4" title="4"><span class="st">  S -&gt; NP VP</span></a>
-<a class="sourceLine" id="cb29-5" title="5"><span class="st">  NP -&gt; Det N</span></a>
-<a class="sourceLine" id="cb29-6" title="6"><span class="st">  VP -&gt; IV</span></a>
-<a class="sourceLine" id="cb29-7" title="7"><span class="st">  Det -&gt; 'the'</span></a>
-<a class="sourceLine" id="cb29-8" title="8"><span class="st">  N -&gt; 'man'</span></a>
-<a class="sourceLine" id="cb29-9" title="9"><span class="st">  N -&gt; 'men'</span></a>
-<a class="sourceLine" id="cb29-10" title="10"><span class="st">  IV -&gt; 'walks'</span></a>
-<a class="sourceLine" id="cb29-11" title="11"><span class="st">  IV -&gt; 'walk'</span></a>
-<a class="sourceLine" id="cb29-12" title="12"><span class="st">  &quot;&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb29-13" title="13">parser <span class="op">=</span> ChartParser(grammar)</a>
-<a class="sourceLine" id="cb29-14" title="14">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walk&quot;</span>))</a>
-<a class="sourceLine" id="cb29-15" title="15"><span class="co">#&gt;&gt;&gt; parses</span></a>
-<a class="sourceLine" id="cb29-16" title="16"><span class="co">#[Tree('S', [Tree('NP', [Tree('Det', ['the']), Tree('N', ['man'])]), Tree('VP', [Tree('IV', ['walk'])])])]</span></a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
+<a class="sourceLine" id="cb33-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="st">  S -&gt; NP VP</span></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="st">  NP -&gt; Det N</span></a>
+<a class="sourceLine" id="cb33-6" title="6"><span class="st">  VP -&gt; IV</span></a>
+<a class="sourceLine" id="cb33-7" title="7"><span class="st">  Det -&gt; 'the'</span></a>
+<a class="sourceLine" id="cb33-8" title="8"><span class="st">  N -&gt; 'man'</span></a>
+<a class="sourceLine" id="cb33-9" title="9"><span class="st">  N -&gt; 'men'</span></a>
+<a class="sourceLine" id="cb33-10" title="10"><span class="st">  IV -&gt; 'walks'</span></a>
+<a class="sourceLine" id="cb33-11" title="11"><span class="st">  IV -&gt; 'walk'</span></a>
+<a class="sourceLine" id="cb33-12" title="12"><span class="st">  &quot;&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb33-13" title="13">parser <span class="op">=</span> ChartParser(grammar)</a>
+<a class="sourceLine" id="cb33-14" title="14">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walk&quot;</span>))</a>
+<a class="sourceLine" id="cb33-15" title="15"><span class="co">#&gt;&gt;&gt; parses</span></a>
+<a class="sourceLine" id="cb33-16" title="16"><span class="co">#[Tree('S', [Tree('NP', [Tree('Det', ['the']), Tree('N', ['man'])]), Tree('VP', [Tree('IV', ['walk'])])])]</span></a></code></pre></div>
 <p><a href="src/NLTK-CF3.py">src/NLTK-CF3.py</a></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb30-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
-<a class="sourceLine" id="cb30-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
-<a class="sourceLine" id="cb30-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
-<a class="sourceLine" id="cb30-4" title="4"><span class="st">  S -&gt; NP_Sg VP_Sg</span></a>
-<a class="sourceLine" id="cb30-5" title="5"><span class="st">  S -&gt; NP_Pl VP_Pl</span></a>
-<a class="sourceLine" id="cb30-6" title="6"><span class="st">  NP_Sg -&gt; Det N_Sg</span></a>
-<a class="sourceLine" id="cb30-7" title="7"><span class="st">  NP_Pl -&gt; Det N_Pl</span></a>
-<a class="sourceLine" id="cb30-8" title="8"><span class="st">  VP_Sg -&gt; IV_Sg</span></a>
-<a class="sourceLine" id="cb30-9" title="9"><span class="st">  VP_Pl -&gt; IV_Pl</span></a>
-<a class="sourceLine" id="cb30-10" title="10"><span class="st">  Det -&gt; 'the'</span></a>
-<a class="sourceLine" id="cb30-11" title="11"><span class="st">  N_Sg -&gt; 'man'</span></a>
-<a class="sourceLine" id="cb30-12" title="12"><span class="st">  N_Pl -&gt; 'men'</span></a>
-<a class="sourceLine" id="cb30-13" title="13"><span class="st">  IV_Sg -&gt; 'walks'</span></a>
-<a class="sourceLine" id="cb30-14" title="14"><span class="st">  IV_Pl -&gt; 'walk'</span></a>
-<a class="sourceLine" id="cb30-15" title="15"><span class="st">  &quot;&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb30-16" title="16">parser <span class="op">=</span> ChartParser(grammar)</a>
-<a class="sourceLine" id="cb30-17" title="17">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walk&quot;</span>))</a>
-<a class="sourceLine" id="cb30-18" title="18"><span class="co">#&gt;&gt;&gt; parses</span></a>
-<a class="sourceLine" id="cb30-19" title="19"><span class="co">#[]</span></a>
-<a class="sourceLine" id="cb30-20" title="20">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walks&quot;</span>))</a>
-<a class="sourceLine" id="cb30-21" title="21"><span class="co">#&gt;&gt;&gt; parses</span></a>
-<a class="sourceLine" id="cb30-22" title="22"><span class="co">#[Tree('S', [Tree('NP_Sg', [Tree('Det', ['the']), Tree('N_Sg', ['man'])]), Tree('VP_Sg', [Tree('IV_Sg', ['walks'])])])]</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
+<a class="sourceLine" id="cb34-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="st">  S -&gt; NP_Sg VP_Sg</span></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="st">  S -&gt; NP_Pl VP_Pl</span></a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="st">  NP_Sg -&gt; Det N_Sg</span></a>
+<a class="sourceLine" id="cb34-7" title="7"><span class="st">  NP_Pl -&gt; Det N_Pl</span></a>
+<a class="sourceLine" id="cb34-8" title="8"><span class="st">  VP_Sg -&gt; IV_Sg</span></a>
+<a class="sourceLine" id="cb34-9" title="9"><span class="st">  VP_Pl -&gt; IV_Pl</span></a>
+<a class="sourceLine" id="cb34-10" title="10"><span class="st">  Det -&gt; 'the'</span></a>
+<a class="sourceLine" id="cb34-11" title="11"><span class="st">  N_Sg -&gt; 'man'</span></a>
+<a class="sourceLine" id="cb34-12" title="12"><span class="st">  N_Pl -&gt; 'men'</span></a>
+<a class="sourceLine" id="cb34-13" title="13"><span class="st">  IV_Sg -&gt; 'walks'</span></a>
+<a class="sourceLine" id="cb34-14" title="14"><span class="st">  IV_Pl -&gt; 'walk'</span></a>
+<a class="sourceLine" id="cb34-15" title="15"><span class="st">  &quot;&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb34-16" title="16">parser <span class="op">=</span> ChartParser(grammar)</a>
+<a class="sourceLine" id="cb34-17" title="17">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walk&quot;</span>))</a>
+<a class="sourceLine" id="cb34-18" title="18"><span class="co">#&gt;&gt;&gt; parses</span></a>
+<a class="sourceLine" id="cb34-19" title="19"><span class="co">#[]</span></a>
+<a class="sourceLine" id="cb34-20" title="20">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walks&quot;</span>))</a>
+<a class="sourceLine" id="cb34-21" title="21"><span class="co">#&gt;&gt;&gt; parses</span></a>
+<a class="sourceLine" id="cb34-22" title="22"><span class="co">#[Tree('S', [Tree('NP_Sg', [Tree('Det', ['the']), Tree('N_Sg', ['man'])]), Tree('VP_Sg', [Tree('IV_Sg', ['walks'])])])]</span></a></code></pre></div>
 <h4 id="exercise-2">Exercise</h4>
 <blockquote>
 <p>Write a context-free grammar accounting for the following sentences in Italian:</p>
@@ -587,69 +653,69 @@ Walk         . IVPl  ::= &quot;walk&quot;
 <p>We can implement this kind of function both in Python and GF.</p>
 <h3 id="smart-paradigms-in-python">Smart paradigms in Python</h3>
 <p>An example for a smart paradigm is the following function for German nouns</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb34-1" title="1">from enum <span class="kw">import</span> <span class="dt">Enum</span></a>
-<a class="sourceLine" id="cb34-2" title="2"></a>
-<a class="sourceLine" id="cb34-3" title="3"><span class="kw">class</span> <span class="dt">Number</span>(<span class="dt">Enum</span>)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb34-4" title="4">    <span class="dt">Sg</span> <span class="fu">=</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb34-5" title="5">    <span class="dt">Pl</span> <span class="fu">=</span> <span class="dv">2</span></a>
-<a class="sourceLine" id="cb34-6" title="6"><span class="kw">class</span> <span class="dt">Case</span>(<span class="dt">Enum</span>)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb34-7" title="7">    <span class="dt">Nom</span> <span class="fu">=</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb34-8" title="8">    <span class="dt">Gen</span> <span class="fu">=</span> <span class="dv">2</span> </a>
-<a class="sourceLine" id="cb34-9" title="9">    <span class="dt">Dat</span> <span class="fu">=</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb34-10" title="10">    <span class="dt">Acc</span> <span class="fu">=</span> <span class="dv">4</span></a>
-<a class="sourceLine" id="cb34-11" title="11"></a>
-<a class="sourceLine" id="cb34-12" title="12">def smartNoun(mann) <span class="fu">:</span></a>
-<a class="sourceLine" id="cb34-13" title="13">    nomPl <span class="fu">=</span> (mann<span class="fu">.</span>replace(<span class="ch">'a'</span>,<span class="ch">'ä'</span>)</a>
-<a class="sourceLine" id="cb34-14" title="14">                 <span class="fu">.</span>replace(<span class="ch">'o'</span>,<span class="ch">'ö'</span>)</a>
-<a class="sourceLine" id="cb34-15" title="15">                 <span class="fu">.</span>replace(<span class="ch">'u'</span>,<span class="ch">'ü'</span>) <span class="fu">+</span> <span class="st">&quot;er&quot;</span>)</a>
-<a class="sourceLine" id="cb34-16" title="16">    <span class="fu">return</span> {</a>
-<a class="sourceLine" id="cb34-17" title="17">        <span class="dt">Number.Sg</span><span class="fu">:</span> {</a>
-<a class="sourceLine" id="cb34-18" title="18">            <span class="dt">Case.Nom</span><span class="fu">:</span> mann,</a>
-<a class="sourceLine" id="cb34-19" title="19">            <span class="dt">Case.Gen</span><span class="fu">:</span> mann <span class="fu">+</span> <span class="st">&quot;s&quot;</span>,</a>
-<a class="sourceLine" id="cb34-20" title="20">            <span class="dt">Case.Dat</span><span class="fu">:</span> mann,</a>
-<a class="sourceLine" id="cb34-21" title="21">            <span class="dt">Case.Acc</span><span class="fu">:</span> mann</a>
-<a class="sourceLine" id="cb34-22" title="22">      },</a>
-<a class="sourceLine" id="cb34-23" title="23">      <span class="dt">Number.Pl</span><span class="fu">:</span> {</a>
-<a class="sourceLine" id="cb34-24" title="24">          <span class="dt">Case.Nom</span><span class="fu">:</span> nomPl,</a>
-<a class="sourceLine" id="cb34-25" title="25">          <span class="dt">Case.Gen</span><span class="fu">:</span> nomPl,</a>
-<a class="sourceLine" id="cb34-26" title="26">          <span class="dt">Case.Dat</span><span class="fu">:</span> nomPl <span class="fu">+</span> <span class="st">&quot;n&quot;</span>,</a>
-<a class="sourceLine" id="cb34-27" title="27">          <span class="dt">Case.Acc</span><span class="fu">:</span> nomPl</a>
-<a class="sourceLine" id="cb34-28" title="28">      }</a>
-<a class="sourceLine" id="cb34-29" title="29">    }</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" title="1">from enum <span class="kw">import</span> <span class="dt">Enum</span></a>
+<a class="sourceLine" id="cb38-2" title="2"></a>
+<a class="sourceLine" id="cb38-3" title="3"><span class="kw">class</span> <span class="dt">Number</span>(<span class="dt">Enum</span>)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb38-4" title="4">    <span class="dt">Sg</span> <span class="fu">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb38-5" title="5">    <span class="dt">Pl</span> <span class="fu">=</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb38-6" title="6"><span class="kw">class</span> <span class="dt">Case</span>(<span class="dt">Enum</span>)<span class="fu">:</span></a>
+<a class="sourceLine" id="cb38-7" title="7">    <span class="dt">Nom</span> <span class="fu">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb38-8" title="8">    <span class="dt">Gen</span> <span class="fu">=</span> <span class="dv">2</span> </a>
+<a class="sourceLine" id="cb38-9" title="9">    <span class="dt">Dat</span> <span class="fu">=</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb38-10" title="10">    <span class="dt">Acc</span> <span class="fu">=</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb38-11" title="11"></a>
+<a class="sourceLine" id="cb38-12" title="12">def smartNoun(mann) <span class="fu">:</span></a>
+<a class="sourceLine" id="cb38-13" title="13">    nomPl <span class="fu">=</span> (mann<span class="fu">.</span>replace(<span class="ch">'a'</span>,<span class="ch">'ä'</span>)</a>
+<a class="sourceLine" id="cb38-14" title="14">                 <span class="fu">.</span>replace(<span class="ch">'o'</span>,<span class="ch">'ö'</span>)</a>
+<a class="sourceLine" id="cb38-15" title="15">                 <span class="fu">.</span>replace(<span class="ch">'u'</span>,<span class="ch">'ü'</span>) <span class="fu">+</span> <span class="st">&quot;er&quot;</span>)</a>
+<a class="sourceLine" id="cb38-16" title="16">    <span class="fu">return</span> {</a>
+<a class="sourceLine" id="cb38-17" title="17">        <span class="dt">Number.Sg</span><span class="fu">:</span> {</a>
+<a class="sourceLine" id="cb38-18" title="18">            <span class="dt">Case.Nom</span><span class="fu">:</span> mann,</a>
+<a class="sourceLine" id="cb38-19" title="19">            <span class="dt">Case.Gen</span><span class="fu">:</span> mann <span class="fu">+</span> <span class="st">&quot;s&quot;</span>,</a>
+<a class="sourceLine" id="cb38-20" title="20">            <span class="dt">Case.Dat</span><span class="fu">:</span> mann,</a>
+<a class="sourceLine" id="cb38-21" title="21">            <span class="dt">Case.Acc</span><span class="fu">:</span> mann</a>
+<a class="sourceLine" id="cb38-22" title="22">      },</a>
+<a class="sourceLine" id="cb38-23" title="23">      <span class="dt">Number.Pl</span><span class="fu">:</span> {</a>
+<a class="sourceLine" id="cb38-24" title="24">          <span class="dt">Case.Nom</span><span class="fu">:</span> nomPl,</a>
+<a class="sourceLine" id="cb38-25" title="25">          <span class="dt">Case.Gen</span><span class="fu">:</span> nomPl,</a>
+<a class="sourceLine" id="cb38-26" title="26">          <span class="dt">Case.Dat</span><span class="fu">:</span> nomPl <span class="fu">+</span> <span class="st">&quot;n&quot;</span>,</a>
+<a class="sourceLine" id="cb38-27" title="27">          <span class="dt">Case.Acc</span><span class="fu">:</span> nomPl</a>
+<a class="sourceLine" id="cb38-28" title="28">      }</a>
+<a class="sourceLine" id="cb38-29" title="29">    }</a></code></pre></div>
 <h4 id="exercise-4">Exercise</h4>
 <blockquote>
 <p>Implement a function that takes a string of a noun and generates the regular noun paradigm for English as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types</p>
 </blockquote>
 <h3 id="smart-paradigms-in-gf">Smart paradigms in GF</h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb35-1" title="1"><span class="fu">--#</span> <span class="fu">-</span>coding<span class="fu">=</span>utf8</a>
-<a class="sourceLine" id="cb35-2" title="2">resource <span class="dt">SmartParadigm</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb35-3" title="3">  </a>
-<a class="sourceLine" id="cb35-4" title="4">  param <span class="dt">Case</span> <span class="fu">=</span> <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Gen</span> <span class="fu">|</span> <span class="dt">Dat</span> <span class="fu">|</span> <span class="dt">Acc</span> ;</a>
-<a class="sourceLine" id="cb35-5" title="5">  param <span class="dt">Number</span> <span class="fu">=</span> <span class="dt">Sg</span> <span class="fu">|</span> <span class="dt">Pl</span> ;</a>
-<a class="sourceLine" id="cb35-6" title="6">  oper</a>
-<a class="sourceLine" id="cb35-7" title="7">    <span class="dt">Noun</span> <span class="fu">:</span> <span class="dt">Type</span> <span class="fu">=</span> { s <span class="fu">:</span> <span class="dt">Number</span> <span class="ot">=&gt;</span> <span class="dt">Case</span> <span class="ot">=&gt;</span> <span class="dt">Str</span> } ;</a>
-<a class="sourceLine" id="cb35-8" title="8">    regNoun <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Noun</span> <span class="fu">=</span> \n <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb35-9" title="9">      <span class="kw">let</span> um <span class="fu">=</span> umlaut n <span class="kw">in</span></a>
-<a class="sourceLine" id="cb35-10" title="10">      { s <span class="fu">=</span> table <span class="dt">Number</span> { <span class="dt">Sg</span> <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb35-11" title="11">			     table <span class="dt">Case</span> {</a>
-<a class="sourceLine" id="cb35-12" title="12">			       <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Dat</span> <span class="fu">|</span> <span class="dt">Acc</span> <span class="ot">=&gt;</span> n ;</a>
-<a class="sourceLine" id="cb35-13" title="13">			       <span class="dt">Gen</span> <span class="ot">=&gt;</span> n <span class="fu">+</span> <span class="st">&quot;es&quot;</span></a>
-<a class="sourceLine" id="cb35-14" title="14">			     } ;</a>
-<a class="sourceLine" id="cb35-15" title="15">			   <span class="dt">Pl</span> <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb35-16" title="16">			     table <span class="dt">Case</span> {</a>
-<a class="sourceLine" id="cb35-17" title="17">			       <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Gen</span> <span class="fu">|</span> <span class="dt">Acc</span><span class="ot">=&gt;</span> um <span class="fu">+</span> <span class="st">&quot;er&quot;</span> ;</a>
-<a class="sourceLine" id="cb35-18" title="18">			       <span class="dt">Dat</span> <span class="ot">=&gt;</span> um <span class="fu">+</span> <span class="st">&quot;ern&quot;</span></a>
-<a class="sourceLine" id="cb35-19" title="19">			     }</a>
-<a class="sourceLine" id="cb35-20" title="20">	  }</a>
-<a class="sourceLine" id="cb35-21" title="21">      } ;</a>
-<a class="sourceLine" id="cb35-22" title="22">    umlaut <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Str</span> <span class="fu">=</span> \s <span class="ot">-&gt;</span> </a>
-<a class="sourceLine" id="cb35-23" title="23">      <span class="kw">case</span> s <span class="kw">of</span> {</a>
-<a class="sourceLine" id="cb35-24" title="24">	p <span class="fu">+</span> <span class="st">&quot;a&quot;</span> <span class="fu">+</span> s <span class="ot">=&gt;</span> p <span class="fu">+</span> <span class="st">&quot;ä&quot;</span> <span class="fu">+</span> s ;</a>
-<a class="sourceLine" id="cb35-25" title="25">	_ <span class="ot">=&gt;</span> s</a>
-<a class="sourceLine" id="cb35-26" title="26">      } ;</a>
-<a class="sourceLine" id="cb35-27" title="27">}</a>
-<a class="sourceLine" id="cb35-28" title="28">      </a>
-<a class="sourceLine" id="cb35-29" title="29">    </a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb39-1" title="1"><span class="fu">--#</span> <span class="fu">-</span>coding<span class="fu">=</span>utf8</a>
+<a class="sourceLine" id="cb39-2" title="2">resource <span class="dt">SmartParadigm</span> <span class="fu">=</span> {</a>
+<a class="sourceLine" id="cb39-3" title="3">  </a>
+<a class="sourceLine" id="cb39-4" title="4">  param <span class="dt">Case</span> <span class="fu">=</span> <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Gen</span> <span class="fu">|</span> <span class="dt">Dat</span> <span class="fu">|</span> <span class="dt">Acc</span> ;</a>
+<a class="sourceLine" id="cb39-5" title="5">  param <span class="dt">Number</span> <span class="fu">=</span> <span class="dt">Sg</span> <span class="fu">|</span> <span class="dt">Pl</span> ;</a>
+<a class="sourceLine" id="cb39-6" title="6">  oper</a>
+<a class="sourceLine" id="cb39-7" title="7">    <span class="dt">Noun</span> <span class="fu">:</span> <span class="dt">Type</span> <span class="fu">=</span> { s <span class="fu">:</span> <span class="dt">Number</span> <span class="ot">=&gt;</span> <span class="dt">Case</span> <span class="ot">=&gt;</span> <span class="dt">Str</span> } ;</a>
+<a class="sourceLine" id="cb39-8" title="8">    regNoun <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Noun</span> <span class="fu">=</span> \n <span class="ot">-&gt;</span></a>
+<a class="sourceLine" id="cb39-9" title="9">      <span class="kw">let</span> um <span class="fu">=</span> umlaut n <span class="kw">in</span></a>
+<a class="sourceLine" id="cb39-10" title="10">      { s <span class="fu">=</span> table <span class="dt">Number</span> { <span class="dt">Sg</span> <span class="ot">=&gt;</span></a>
+<a class="sourceLine" id="cb39-11" title="11">			     table <span class="dt">Case</span> {</a>
+<a class="sourceLine" id="cb39-12" title="12">			       <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Dat</span> <span class="fu">|</span> <span class="dt">Acc</span> <span class="ot">=&gt;</span> n ;</a>
+<a class="sourceLine" id="cb39-13" title="13">			       <span class="dt">Gen</span> <span class="ot">=&gt;</span> n <span class="fu">+</span> <span class="st">&quot;es&quot;</span></a>
+<a class="sourceLine" id="cb39-14" title="14">			     } ;</a>
+<a class="sourceLine" id="cb39-15" title="15">			   <span class="dt">Pl</span> <span class="ot">=&gt;</span></a>
+<a class="sourceLine" id="cb39-16" title="16">			     table <span class="dt">Case</span> {</a>
+<a class="sourceLine" id="cb39-17" title="17">			       <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Gen</span> <span class="fu">|</span> <span class="dt">Acc</span><span class="ot">=&gt;</span> um <span class="fu">+</span> <span class="st">&quot;er&quot;</span> ;</a>
+<a class="sourceLine" id="cb39-18" title="18">			       <span class="dt">Dat</span> <span class="ot">=&gt;</span> um <span class="fu">+</span> <span class="st">&quot;ern&quot;</span></a>
+<a class="sourceLine" id="cb39-19" title="19">			     }</a>
+<a class="sourceLine" id="cb39-20" title="20">	  }</a>
+<a class="sourceLine" id="cb39-21" title="21">      } ;</a>
+<a class="sourceLine" id="cb39-22" title="22">    umlaut <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Str</span> <span class="fu">=</span> \s <span class="ot">-&gt;</span> </a>
+<a class="sourceLine" id="cb39-23" title="23">      <span class="kw">case</span> s <span class="kw">of</span> {</a>
+<a class="sourceLine" id="cb39-24" title="24">	p <span class="fu">+</span> <span class="st">&quot;a&quot;</span> <span class="fu">+</span> s <span class="ot">=&gt;</span> p <span class="fu">+</span> <span class="st">&quot;ä&quot;</span> <span class="fu">+</span> s ;</a>
+<a class="sourceLine" id="cb39-25" title="25">	_ <span class="ot">=&gt;</span> s</a>
+<a class="sourceLine" id="cb39-26" title="26">      } ;</a>
+<a class="sourceLine" id="cb39-27" title="27">}</a>
+<a class="sourceLine" id="cb39-28" title="28">      </a>
+<a class="sourceLine" id="cb39-29" title="29">    </a></code></pre></div>
 <h1 id="other-problems">Other problems</h1>
 <ul>
 <li>compile-time vs. run-time strings</li>
