@@ -5,18 +5,18 @@ title: Grammatical Framework for Python programmers
 This short tutorial is aimed at Python programmers who would like to learn how to use the Grammatical Framework. It tries to meet you in familiar terrain and take you gently over to the way GF works.
 By the end of this tutorial you won't know all of GF, but you will be able to consume the regular GF documentation with much less friction: think of this tutorial as an English speaker learning a little bit of Italian before learning Latin.
 
-## Types
+# Types
 
 (Data-)Types are a more important part in some programming languages than in other languages. Sometimes you have to state for each variable what values you should be allowed to save in, other languages like Python are more liberal
 about it. Variables can change their type, i.e. the kind of values they can keep, and only the current value defines in what context they can be used.
 
-### Types in Python
+## Types in Python
 
 As a Python programmer you usually don't think too much about types. Unfortunately in GF types much more important. Python is, [by default](https://medium.com/@ageitgey/learn-how-to-use-static-type-checking-in-python-3-6-in-10-minutes-12c86d72677b), dynamically typed. GF is statically typed. So we'll start by going over Python's type system, and relate that to GF's type system.
 
-### Dynamic typing in Python
+## Dynamic typing in Python
 
-#### Basic types
+### Basic types
 
 Basic types in Python consist of Strings and Numbers (Integer, Float, Complex). A special case are boolean (logical expression) that will be explained later.
 You can ask Python to give you the type for expressions. These types are automatically inferred -- we don't have to tell Python what type
@@ -58,7 +58,7 @@ The values considered **false** are:
 
 Everything else is considered **true**.
 
-#### Compound types
+### Compound types
 
 These basic types can be used in compound types. Compound types are among others Lists, Tuples and Dictionaries.
 These again can be part of other compound types as well, e.g. list containing lists as elements. Python does not really enforce
@@ -88,11 +88,11 @@ can use the `[]` operator.
 
 Another interesting group of datatypes are enumeration types where you define a type by listing all possible values. In Python enumerable types are objects of class `enum`. They can also be used as keys in dictionary. That gives us a way to express a mapping from grammatical number and case to a word form for german nouns.
 
-##### Exercise
+#### Exercise
 
 > If you haven't done so before, try the type() function in Python on different values and compare the output. 
 
-#### Enumeration types
+### Enumeration types
 
 Enumeration types are useful in linguistics to represent inflection: languages inflect words by gender, case, number, tense, and so on. We can set up a variety of enum classes for each inflection.
 
@@ -150,11 +150,11 @@ KeyError: <Case.Gen: 2>
 
 An aside: a mathematician would say that this abbreviated dictionary represents a partial function, as opposed to a total function, and the error here is due to the lack of totality. The mathematician thinks of the dictionary as a function in the sense that it maps input (grammatical number and case) to output (a German word).
 
-##### Exercise
+#### Exercise
 
 > Define a few lexical items for a language of your choice
 
-#### Functions
+### Functions
 
 So that brings us to actual Python functions. Functions in Python are usually defined and given a name with the `def` keyword. But Python also supports so-called anonymous functions or lambda expressions. Below the successor function is expressed in three different ways.
 
@@ -176,7 +176,7 @@ So that brings us to actual Python functions. Functions in Python are usually de
 <class 'function'>
 ```
 
-### Static typing in GF
+## Static typing in GF
 
 Static types are more complicated. There are more rules. You will find the same kinds of rules in any statically typed language. GF's type system will be familiar to Haskell or Rust programmers; but this tutorial is intended for Python programmers, so we will assume no familiarity with that tradition. As static types come to Python, Python programmers will have to climb much the same learning curve as what follows here.
 
@@ -217,7 +217,7 @@ In GF, the equivalent function definition might read:
 
 The left two `Int`s above describe the arguments to `add`, and the rightmost `Int` describes the return value.
 
-### Linguistically speaking
+## Linguistically speaking
 
 GF code is organized into modules.
 
@@ -261,7 +261,7 @@ src/Functions.gf
 
 As you can see in the examples above, for each variable we first give the type. That is best practice but in simple cases not necessary because GF can infer the type automatically. The only case where the type must be given is the function. But it is good discipline to annotate your types: it is like brushing your teeth.
 
-### Compile-Time Tokens vs Run-Time Strings
+## Compile-Time Tokens vs Run-Time Strings
 
 This is as good a time as any to point out the difference between the operators `+` and `++`. This is a common source of problems. GF scrupulously observes the difference between compile-time string operations and run-time string operations. But this distinction is more obvious to GF than it is to you, and can be the source of mysterious errors.
 
@@ -285,7 +285,7 @@ So how do you know whether a line of code is executing at compile-time or at run
 
 We'll get to that later.
 
-### Lambda Abstractions
+## Lambda Abstractions
 
 Back to the above code example, the last line -- the function -- is esentially a lambda expression like the one used in Python. The difference is that Python's keyword `lambda` is shortened to a backslash (`\`), and the colon that separates the parameter from the function body is replaced by an arrow (`->}). The same arrows appear in Python's type hints for functions.
 
@@ -310,7 +310,7 @@ Prelude.False
 0 msec
 ```
 
-### Compound Types
+## Compound Types
 
 In GF can compose types to create new types. There are a few ways to construct compound types: records, tables and function types. GF expects you to *declare* the type, which amounts to saying "this is the shape of the thing". You can then *define* a variable that matches the type.
 
@@ -458,9 +458,11 @@ In the last kind of modules (we want to look at here) are concrete modules. Here
 
 ## Context-free Grammars
 
+# Context-free Grammars
+
 A simple form of grammars are the so-called context-free grammars. They can be used in lots of applications both in computer science and linguistics but have limitations that encourage us to use more expressive formalisms like GF. We start with simple grammars in Python with NLTK, then show to translate them to a format that also works in GF and finally show how to implement them in the full GF formalism.
 
-### Context-free Grammars in Python/NLTK
+## Context-free Grammars in Python/NLTK
 
 [src/NLTK-CF.py](src/NLTK-CF.py)
 ``` {.include .python}
@@ -477,7 +479,7 @@ src/NLTK-CF2.py
 src/NLTK-CF3.py
 ```
 
-##### Exercise
+#### Exercise
 
 >  Write a context-free grammar accounting for the following sentences in Italian:
 >
@@ -491,7 +493,7 @@ src/NLTK-CF3.py
 >  
 >  The first one should be accepted and the second one rejected.
 
-### Context-free Grammars in GF
+## Context-free Grammars in GF
 
 [src/GF-CF.cf](src/GF-CF.cf)
 ```include
@@ -508,20 +510,20 @@ src/GF-CF2.cf
 src/GF-CF3.cf
 ```
 
-##### Exercise
+#### Exercise
 
 >  Write the same grammar from the previous task in GF. Generate all trees accounted for by the grammar. Can you guess how many trees will be
 >  generated from a grammar?
 
-## Step beyond Context-freeness: Tables and Records
+# Step beyond Context-freeness: Tables and Records
 
-### Smart paradigms
+## Smart paradigms
 
 A smart paradigm in the GF jargon is a function that takes one or a few word forms and uses this information provided to generate the whole paradigm, i.e. the list of all word forms depending on the grammatical features the word is inflected on.
 
 We can implement this kind of function both in Python and GF.
 
-#### Smart paradigms in Python
+### Smart paradigms in Python
 
 An example for a smart paradigm is the following function for German nouns
 
@@ -529,23 +531,23 @@ An example for a smart paradigm is the following function for German nouns
 src/SmartParadigm.py
 ```
 
-##### Exercise
+#### Exercise
 
 > Implement a function that takes a string of a noun and generates the regular noun paradigm for English as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types
 
 
-#### Smart paradigms in GF
+### Smart paradigms in GF
 
 ``` {.include .haskell}
 src/SmartParadigm.gf
 ```
 
-## Other problems
+# Other problems
 
 * compile-time vs. run-time strings
 * ...
 
-## The GF-Python API
+# The GF-Python API
 
 GF ships with a Python runtime: that means your Python program can use the GF API, which is called `pgf`. There is a longer [tutorial](http://www.grammaticalframework.org/doc/python-api.html). The Python runtime depends on the C runtime. If these runtimes aren't available in the package you downloaded, it is possible to compile them from source. First compile the C runtime, then install the Python runtime; the INSTALL files describe the process.
 
