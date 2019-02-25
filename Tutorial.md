@@ -452,8 +452,10 @@ So, what's the difference here? Both tables and functions can handle arbitrary i
 
 In the last kind of modules (we want to look at here) are concrete modules. Here we can use most of the things we have seen for the resource modules. But in the end it boils down to using strings in different ways. We store strings in record fields, select the right strings from tables and put them together at the right point. Sometimew we need to additionally store grammatical features. So we need strings, tables, records, and `param` types.
 
+<!-- 
 % TODO: talk about oper  Thing : Type = { ... };
-% TODO: talk about param Thing : One | Two | Three;
+% TODO: talk about param Thing : One | Two | Three; 
+-->
 
 
 ## Context-free Grammars
