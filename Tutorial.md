@@ -18,7 +18,7 @@ As a Python programmer you usually don't think too much about types. Unfortunate
 
 ### Basic types
 
-Basic types in Python consist of Strings and Numbers (Integer, Float, Complex). A special case are boolean (logical expression) that will be explained later.
+Basic types in Python consist of Strings and Numbers (Integer, Float, Complex). A special case are Boolean (logical expression) that will be explained later.
 You can ask Python to give you the type for expressions. These types are automatically inferred -- we don't have to tell Python what type
 a variable has, as can be seen in the last example below.
 
@@ -86,7 +86,7 @@ can use the `[]` operator.
 <class 'dict'>
 ```
 
-Another interesting group of datatypes are enumeration types where you define a type by listing all possible values. In Python enumerable types are objects of class `enum`. They can also be used as keys in dictionary. That gives us a way to express a mapping from grammatical number and case to a word form for german nouns.
+Another interesting group of datatypes are enumeration types where you define a type by listing all possible values. In Python enumerable types are objects of class `enum`. They can also be used as keys in dictionary. That gives us a way to express a mapping from grammatical number and case to a word form for German nouns.
 
 #### Exercise
 
@@ -287,7 +287,7 @@ We'll get to that later.
 
 ## Lambda Abstractions
 
-Back to the above code example, the last line -- the function -- is esentially a lambda expression like the one used in Python. The difference is that Python's keyword `lambda` is shortened to a backslash (`\`), and the colon that separates the parameter from the function body is replaced by an arrow (`->}). The same arrows appear in Python's type hints for functions.
+Back to the above code example, the last line -- the function -- is essentially a lambda expression like the one used in Python. The difference is that Python's keyword `lambda` is shortened to a backslash (`\`), and the colon that separates the parameter from the function body is replaced by an arrow (`->}). The same arrows appear in Python's type hints for functions.
 
 ```
 > cc s
@@ -450,7 +450,7 @@ So, what's the difference here? Both tables and functions can handle arbitrary i
   oper
 ```
 
-In the last kind of modules (we want to look at here) are concrete modules. Here we can use most of the things we have seen for the resource modules. But in the end it boils down to using strings in different ways. We store strings in record fields, select the right strings from tables and put them together at the right point. Sometimew we need to additionally store grammatical features. So we need strings, tables, records, and `param` types.
+In the last kind of modules (we want to look at here) are concrete modules. Here we can use most of the things we have seen for the resource modules. But in the end it boils down to using strings in different ways. We store strings in record fields, select the right strings from tables and put them together at the right point. Sometimes we need to additionally store grammatical features. So we need strings, tables, records, and `param` types.
 
 <!-- 
 % TODO: talk about oper  Thing : Type = { ... };
@@ -459,15 +459,15 @@ In the last kind of modules (we want to look at here) are concrete modules. Here
 
 ## Lists
 
-As a Python programmar you most likely encountered lists. They are a handy data structure that can store lots of different types of data. We have seen some examples about lists
+As a Python programmer you most likely encountered lists. They are a handy data structure that can store lots of different types of data. We have seen some examples about lists
 in Python before. GF also offers (very limited) support for lists. But first have a look at lists in Python and general.
 
 In Python, as we have seen before, lists are a sequence of values of potentially different types. However, most often all values in a list have the same type. There are many built-in
-funcions that work on list. To construct a list in Python we can either create it by listing all its elements explicitely or by starting with the empty list `[]` and `append`ing elements
+functions that work on list. To construct a list in Python we can either create it by listing all its elements explicitly or by starting with the empty list `[]` and `append`ing elements
 at the end. To deconstruct the list, we can `pop` elements from the back of the list. In LISP-speak that makes it a SNOC list (that is spelled CONS backwards, the LISP way of constructing lists).
 One important thing to remember about Python lists is, that it is possible to completely deconstruct a list that has been constructed before.
 
-In GF we can also have lists, e.g. as list categories. They can be used to model conjunction of several constituents. If we have the category `S` we can also define the category `ListS` which models a list of `S` elements. To construct this list, we need two operations, `BaseS` to generate a list of category `S` and the LISPy operation `ConsS` that takes an element of category `S` and a list of categpory `S` and extends the list by one element of this categroy. This all might sound a little vague, so let's have a look at a simple example, a list of digits. The grammars are the following:
+In GF we can also have lists, e.g. as list categories. They can be used to model conjunction of several constituents. If we have the category `S` we can also define the category `ListS` which models a list of `S` elements. To construct this list, we need two operations, `BaseS` to generate a list of category `S` and the LISPy operation `ConsS` that takes an element of category `S` and a list of category `S` and extends the list by one element of this category. This all might sound a little vague, so let's have a look at a simple example, a list of digits. The grammars are the following:
 
 ``` {.include .haskell}
 src/ListAbs.gf
@@ -489,7 +489,7 @@ src/List2.gf
 
 This solves our problem with the commas. Probably we can come up with use cases where the base list should have at least n elements, for example in natural languages the conjunction of constituents requires at least two elements.
 
-At some point it becomes tedious to define the list categories and the corresponding `BaseC` and `ConsC` functions in the abstract syntax. For that reason GF provides some syntactic sugar for creating list categories. Instead of `ListC` we can write in a very Haskell-like style `[C]` to create a list category for category `C`. This adds some additional magic which also creates the abstract definition of `BaseC` and `ConsC` without explicitely mentioning it. To provide the flexibility about the base case we discussed before we can even write `[C]{n}` which means the function `BaseC` is definied in the following way `BaseC : C -> ... -> in total n times -> ... -> C -> ListC`. With this trick we can redefine the grammar `List3Abs` the following way:
+At some point it becomes tedious to define the list categories and the corresponding `BaseC` and `ConsC` functions in the abstract syntax. For that reason GF provides some syntactic sugar for creating list categories. Instead of `ListC` we can write in a very Haskell-like style `[C]` to create a list category for category `C`. This adds some additional magic which also creates the abstract definition of `BaseC` and `ConsC` without explicitly mentioning it. To provide the flexibility about the base case we discussed before we can even write `[C]{n}` which means the function `BaseC` is defined in the following way `BaseC : C -> ... -> in total n times -> ... -> C -> ListC`. With this trick we can redefine the grammar `List3Abs` the following way:
 
 ``` {.include .haskell}
 src/List3Abs.gf
@@ -519,7 +519,7 @@ src/List5Abs.gf
 src/List5.gf
 ```
  
-The list we had in the previous example was kind of a classical CONS list, i.e. we start with an empty list and add elements in the front. Now we have a SNOC list again, a list where we add elements in the end. Also for the lists we want to use with conjunctions it does not make sense to have less than two elements, e.g. "and 3" or "42 or" are both not really well-formed and complete statements. For that reason we use the `[C]{n}` syntax again to ask the base case to have two parameters. As a result the shortest lists we can have have at least two elements. When we add elements to the list, we put a comma between the previous list and the previous last element. This is in many languages the expected behaviour, that in longer coordinating expressions we only have the conjunction in the end and commas in all other places.
+The list we had in the previous example was kind of a classical CONS list, i.e. we start with an empty list and add elements in the front. Now we have a SNOC list again, a list where we add elements in the end. Also for the lists we want to use with conjunctions it does not make sense to have less than two elements, e.g. "and 3" or "42 or" are both not really well-formed and complete statements. For that reason we use the `[C]{n}` syntax again to ask the base case to have two parameters. As a result the shortest lists we can have have at least two elements. When we add elements to the list, we put a comma between the previous list and the previous last element. This is in many languages the expected behavior, that in longer coordinating expressions we only have the conjunction in the end and commas in all other places.
 
 This section showed how lists in GF work compared to other programming languages but also how they still can be very useful to model natural language phenomena.
 
