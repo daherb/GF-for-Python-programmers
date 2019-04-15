@@ -1,89 +1,3 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Grammatical Framework for Python programmers</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-  <style>body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"
-  };</style>
-</head>
-<body>
-<header id="title-block-header">
-<h1 class="title">Grammatical Framework for Python programmers</h1>
-</header>
 <p>This short tutorial is aimed at Python programmers who would like to learn how to use the Grammatical Framework. It tries to meet you in familiar terrain and take you gently over to the way GF works. By the end of this tutorial you won’t know all of GF, but you will be able to consume the regular GF documentation with much less friction: think of this tutorial as an English speaker learning a little bit of Italian before learning Latin.</p>
 <h1 id="types">Types</h1>
 <p>(Data-)Types are a more important part in some programming languages than in other languages. Sometimes you have to state for each variable what values you should be allowed to save in, other languages like Python are more liberal about it. Variables can change their type, i.e. the kind of values they can keep, and only the current value defines in what context they can be used.</p>
@@ -93,21 +7,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="basic-types">Basic types</h3>
 <p>Basic types in Python consist of Strings and Numbers (Integer, Float, Complex). A special case are Boolean (logical expression) that will be explained later. You can ask Python to give you the type for expressions. These types are automatically inferred – we don’t have to tell Python what type a variable has, as can be seen in the last example below.</p>
 <pre><code>&gt;&gt;&gt; type(3)
-&lt;class 'int'&gt;
+&lt;class &#39;int&#39;&gt;
 &gt;&gt;&gt; type(3.0)
-&lt;class 'float'&gt;
+&lt;class &#39;float&#39;&gt;
 &gt;&gt;&gt; type(&quot;Foo&quot;)
-&lt;class 'str'&gt;
-&gt;&gt;&gt; type(complex('1+2j')) # Is that still considered basic?
-&lt;class 'complex'&gt;
+&lt;class &#39;str&#39;&gt;
+&gt;&gt;&gt; type(complex(&#39;1+2j&#39;)) # Is that still considered basic?
+&lt;class &#39;complex&#39;&gt;
 &gt;&gt;&gt; a=3
 &gt;&gt;&gt; type(a)
-&lt;class 'int'&gt;
+&lt;class &#39;int&#39;&gt;
 &gt;&gt;&gt; a=&quot;Foo&quot;
 &gt;&gt;&gt; type(a)</code></pre>
 <p>A special case: Boolean values. Python’s Boolean <em>datatype</em> simply uses 1 for True and 0 for False:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="op">&gt;&gt;&gt;</span> <span class="va">True</span> <span class="op">+</span> <span class="va">True</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="op">&gt;&gt;&gt;</span> <span class="va">True</span> <span class="op">+</span> <span class="va">True</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="dv">2</span></a></code></pre></div>
 <p>Python interprets values of other types as truthy or falsy values:</p>
 <p>The values considered <strong>false</strong> are:</p>
 <ul>
@@ -122,23 +36,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="compound-types">Compound types</h3>
 <p>These basic types can be used in compound types. Compound types are among others Lists, Tuples and Dictionaries. These again can be part of other compound types as well, e.g. list containing lists as elements. Python does not really enforce that all elements of a list have the same type (Disclaimer: <a href="https://docs.python.org/3/library/typing.html">In Python 3.5 they introduces strict typing and type annotations</a> to solve that problem) as you can see in the examples. To access elements in compound objects we can use the <code>[]</code> operator.</p>
 <pre><code>&gt;&gt;&gt; type([])
-&lt;class 'list'&gt;
+&lt;class &#39;list&#39;&gt;
 &gt;&gt;&gt; type([1,2,3])
-&lt;class 'list'&gt;
+&lt;class &#39;list&#39;&gt;
 &gt;&gt;&gt; type([1,2,&quot;foo&quot;,&quot;bar&quot;])
-&lt;class 'list'&gt;
+&lt;class &#39;list&#39;&gt;
 &gt;&gt;&gt; type(())
-&lt;class 'tuple'&gt;
+&lt;class &#39;tuple&#39;&gt;
 &gt;&gt;&gt; type((1,2))
-&lt;class 'tuple'&gt;
+&lt;class &#39;tuple&#39;&gt;
 &gt;&gt;&gt; type((1,2,&quot;foo&quot;))
-&lt;class 'tuple'&gt;
+&lt;class &#39;tuple&#39;&gt;
 &gt;&gt;&gt; type({})
-&lt;class 'dict'&gt;
-&gt;&gt;&gt; type({'foo':1,'bar':2})
-&lt;class 'dict'&gt;
-&gt;&gt;&gt; type({'foo':1,'bar':'baz'})
-&lt;class 'dict'&gt;</code></pre>
+&lt;class &#39;dict&#39;&gt;
+&gt;&gt;&gt; type({&#39;foo&#39;:1,&#39;bar&#39;:2})
+&lt;class &#39;dict&#39;&gt;
+&gt;&gt;&gt; type({&#39;foo&#39;:1,&#39;bar&#39;:&#39;baz&#39;})
+&lt;class &#39;dict&#39;&gt;</code></pre>
 <p>Another interesting group of datatypes are enumeration types where you define a type by listing all possible values. In Python enumerable types are objects of class <code>enum</code>. They can also be used as keys in dictionary. That gives us a way to express a mapping from grammatical number and case to a word form for German nouns.</p>
 <h4 id="exercise">Exercise</h4>
 <blockquote>
@@ -146,32 +60,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <h3 id="enumeration-types">Enumeration types</h3>
 <p>Enumeration types are useful in linguistics to represent inflection: languages inflect words by gender, case, number, tense, and so on. We can set up a variety of enum classes for each inflection.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="op">&gt;&gt;</span> <span class="im">from</span> enum <span class="im">import</span> Enum</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="op">&gt;&gt;</span> <span class="kw">class</span> Number(Enum):</a>
-<a class="sourceLine" id="cb4-3" title="3">...   Sg <span class="op">=</span> <span class="dv">1</span> <span class="co"># singular</span></a>
-<a class="sourceLine" id="cb4-4" title="4">...   Pl <span class="op">=</span> <span class="dv">2</span> <span class="co"># plural</span></a>
-<a class="sourceLine" id="cb4-5" title="5">... </a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="op">&gt;&gt;&gt;</span> man<span class="op">=</span>{Number.Sg:<span class="st">&quot;man&quot;</span>,Number.Pl:<span class="st">&quot;men&quot;</span>}</a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="op">&gt;&gt;&gt;</span> man[Number.Sg]</a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co">'man'</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Case(Enum):</a>
-<a class="sourceLine" id="cb4-10" title="10">...   Nom <span class="op">=</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb4-11" title="11">...   Gen <span class="op">=</span> <span class="dv">2</span></a>
-<a class="sourceLine" id="cb4-12" title="12">...   Dat <span class="op">=</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb4-13" title="13">...   Acc <span class="op">=</span> <span class="dv">4</span></a>
-<a class="sourceLine" id="cb4-14" title="14">... </a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="op">&gt;&gt;</span> <span class="im">from</span> enum <span class="im">import</span> Enum</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="op">&gt;&gt;</span> <span class="kw">class</span> Number(Enum):</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">...   Sg <span class="op">=</span> <span class="dv">1</span> <span class="co"># singular</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">...   Pl <span class="op">=</span> <span class="dv">2</span> <span class="co"># plural</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">... </a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="op">&gt;&gt;&gt;</span> man<span class="op">=</span>{Number.Sg:<span class="st">&quot;man&quot;</span>,Number.Pl:<span class="st">&quot;men&quot;</span>}</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="op">&gt;&gt;&gt;</span> man[Number.Sg]</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">&#39;man&#39;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Case(Enum):</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">...   Nom <span class="op">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">...   Gen <span class="op">=</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">...   Dat <span class="op">=</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">...   Acc <span class="op">=</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">... </a></code></pre></div>
 <p>Dictionary keys can be numbers, and enums are numbers. So enums can be used as dictionary keys. Now we can express the declension of German nouns in a dictionary:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" title="1"><span class="op">&gt;&gt;&gt;</span> mann<span class="op">=</span>{Number.Sg:{Case.Nom:<span class="st">&quot;Mann&quot;</span>, </a>
-<a class="sourceLine" id="cb5-2" title="2">...                  Case.Gen:<span class="st">&quot;Mannes&quot;</span>, </a>
-<a class="sourceLine" id="cb5-3" title="3">...                  Case.Dat:<span class="st">&quot;Mann&quot;</span>, </a>
-<a class="sourceLine" id="cb5-4" title="4">...                  Case.Acc:<span class="st">&quot;Mann&quot;</span>},</a>
-<a class="sourceLine" id="cb5-5" title="5">...       Number.Pl:{Case.Nom:<span class="st">&quot;Männer&quot;</span>, </a>
-<a class="sourceLine" id="cb5-6" title="6">...                  Case.Gen:<span class="st">&quot;Männer&quot;</span>, </a>
-<a class="sourceLine" id="cb5-7" title="7">...                  Case.Dat:<span class="st">&quot;Männern&quot;</span>, </a>
-<a class="sourceLine" id="cb5-8" title="8">...                  Case.Acc:<span class="st">&quot;Männern&quot;</span>}</a>
-<a class="sourceLine" id="cb5-9" title="9">... }</a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="op">&gt;&gt;&gt;</span> mann[Number.Sg][Case.Gen]</a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="co">'Mannes'</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="op">&gt;&gt;&gt;</span> mann<span class="op">=</span>{Number.Sg:{Case.Nom:<span class="st">&quot;Mann&quot;</span>, </a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">...                  Case.Gen:<span class="st">&quot;Mannes&quot;</span>, </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">...                  Case.Dat:<span class="st">&quot;Mann&quot;</span>, </a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">...                  Case.Acc:<span class="st">&quot;Mann&quot;</span>},</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">...       Number.Pl:{Case.Nom:<span class="st">&quot;Männer&quot;</span>, </a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">...                  Case.Gen:<span class="st">&quot;Männer&quot;</span>, </a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">...                  Case.Dat:<span class="st">&quot;Männern&quot;</span>, </a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">...                  Case.Acc:<span class="st">&quot;Männern&quot;</span>}</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">... }</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="op">&gt;&gt;&gt;</span> mann[Number.Sg][Case.Gen]</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">&#39;Mannes&#39;</span></a></code></pre></div>
 <p>Other languages might call this data structure a hash, or a map, or an associative array, or a record. Python calls it a dictionary. Linguists also call it a dictionary. Isn’t that nice?</p>
 <p>One problem with this approach is that Python does not enforce that we define mappings for all possible values. This can easily lead to errors. In the next example we only define values for some of the keys and then try to access undefined values which leads to an error.</p>
 <pre><code>&gt;&gt;&gt; mann={
@@ -198,16 +112,16 @@ KeyError: &lt;Case.Gen: 2&gt;</code></pre>
 ...   return x+1
 ... 
 &gt;&gt;&gt; type(succ1)
-&lt;class 'function'&gt;
+&lt;class &#39;function&#39;&gt;
 
 # 2. The variable succ2 contains a lambda function.
 &gt;&gt;&gt; succ2 = lambda x : x+1
 &gt;&gt;&gt; type(succ2)
-&lt;class 'function'&gt;
+&lt;class &#39;function&#39;&gt;
 
-# 3. We don't even bother to give it a name.
+# 3. We don&#39;t even bother to give it a name.
 &gt;&gt;&gt; type(lambda x: x+1)
-&lt;class 'function'&gt;</code></pre>
+&lt;class &#39;function&#39;&gt;</code></pre>
 <h2 id="static-typing-in-gf">Static typing in GF</h2>
 <p>Static types are more complicated. There are more rules. You will find the same kinds of rules in any statically typed language. GF’s type system will be familiar to Haskell or Rust programmers; but this tutorial is intended for Python programmers, so we will assume no familiarity with that tradition. As static types come to Python, Python programmers will have to climb much the same learning curve as what follows here.</p>
 <p>GF’s primitive types will be familiar from Python.</p>
@@ -217,54 +131,33 @@ KeyError: &lt;Case.Gen: 2&gt;</code></pre>
 <p>Python has dicts (of the form <code>{ 'foo': 123 }</code>). GF has records (of the form <code>{ foo: 123}</code>). You get the 123 out of a Python dict by saying <code>{'foo':123}['foo']</code>. You get the 123 out of a GF record by saying <code>{ foo:123 }.foo</code>.</p>
 <p>How do you explicitly tell Python, or GF, for that matter, about types?</p>
 <p>In Python, you use type hints. Instead of saying</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" title="1">    <span class="kw">def</span> add(amount1, amount2):</a>
-<a class="sourceLine" id="cb8-2" title="2">        <span class="cf">return</span> amount1 <span class="op">+</span> amount2</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1">    <span class="kw">def</span> add(amount1, amount2):</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">        <span class="cf">return</span> amount1 <span class="op">+</span> amount2</a></code></pre></div>
 <p>you would say</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" title="1">    <span class="kw">def</span> add(amount1: <span class="bu">int</span>, amount2: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
-<a class="sourceLine" id="cb9-2" title="2">        <span class="cf">return</span> amount1 <span class="op">+</span> amount2</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1">    <span class="kw">def</span> add(amount1: <span class="bu">int</span>, amount2: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">        <span class="cf">return</span> amount1 <span class="op">+</span> amount2</a></code></pre></div>
 <p><a href="http://mypy-lang.org/">Mypy</a> has good documentation, and you can refer to <a href="https://www.python.org/dev/peps/pep-0484/">PEP 484</a> for full details.</p>
 <p>In GF, the equivalent function definition might read:</p>
-<pre><code>    def add : Int -&gt; Int -&gt; Int
-    add amount1 amount2 = amount1 plus amount2</code></pre>
+<pre><code>    oper 
+      add : Int -&gt; Int -&gt; Int ;
+      add amount1 amount2 = plus amount1 amount2 ;</code></pre>
 <p>The left two <code>Int</code>s above describe the arguments to <code>add</code>, and the rightmost <code>Int</code> describes the return value.</p>
-<h2 id="linguistically-speaking">Linguistically speaking</h2>
+<h2 id="modules">Modules</h2>
 <p>GF code is organized into modules.</p>
-<p>Abstract modules are language-independent, and describe the semantic categories and linearization relationships at a very high level. If you have the idea that “Italian wine is delicious”, you might break that down as a predicate sentence (<em>x</em> <em>y</em> is <em>z</em>) which has an adjectival noun phrase (<em>x</em> = Italian, <em>y</em> = wine), a copula (“is”), and an adjective (<em>z</em> = delicious).</p>
-<p>The abstract grammar would concern itself primarily with outlining the parts of speech (x, y, z) and how they fit together (e.g. nouns can be modified by adjectives), and only mention in passing that wine is a particular instance of a noun, and Italianness and deliciousness are adjectival modifiers of interest.</p>
-<p>Concrete modules are where the language-specific details appear: if your application translates between English and Italian, you would have two concrete modules. One module knows that wine is spelled “wine” and the other knows that wine is spelled “vino”.</p>
-<p>Resource modules are a good place to factor out auxiliary functions that are common to English and Italian, so you don’t have to repeat yourself. For example, the idea of negation could appear in a resource module: corked wine is <em>not</em> delicious, in any language.</p>
 <p>Because we have abstract modules, concrete modules and resource modules we have different types that are important in different situations.</p>
-<p>In the abstract syntax we do not really have to care about types. Here we think linguistically and treat it more or less like context-free grammars, i.e. categories and syntax rules.</p>
+<h3 id="resource-modules">Resource modules</h3>
+<p>Resource modules are a good place to factor out auxiliary functions that are common to English and Italian, so you don’t have to repeat yourself. For example, the idea of negation could appear in a resource module: corked wine is <em>not</em> delicious, in any language.</p>
 <p>So we will start our examination of GF types by looking at resource modules. Here we can use all the different types available in GF. These include Token lists (a.k.a. arrays of Str), Integers, Floats, and Bool. Most of them are defined in a module called Predef but Bool is defined in the module Prelude. Anonymous function types (lambdas) are standard types in GF. In resource modules, functions are defined as lambdas. (In practice, two equivalent syntaxes are available, just as, in the Python examples above, succ1 and succ2 are equivalent.)</p>
-<p><a href="src/SimpleTypes.gf">src/SimpleTypes.gf</a></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" title="1">resource <span class="dt">SimpleTypes</span> <span class="fu">=</span> open <span class="dt">Predef</span>,<span class="dt">Prelude</span> <span class="kw">in</span> {</a>
-<a class="sourceLine" id="cb11-2" title="2">  oper</a>
-<a class="sourceLine" id="cb11-3" title="3">    s <span class="fu">:</span> <span class="dt">Str</span> <span class="fu">=</span> <span class="st">&quot;foo&quot;</span> <span class="fu">+</span> <span class="st">&quot;bar&quot;</span> ;</a>
-<a class="sourceLine" id="cb11-4" title="4">    st <span class="fu">:</span> <span class="dt">Str</span> <span class="fu">=</span> <span class="st">&quot;foo&quot;</span> <span class="fu">++</span> <span class="st">&quot;bar&quot;</span>;</a>
-<a class="sourceLine" id="cb11-5" title="5">    i <span class="fu">:</span> <span class="dt">Predef.Int</span> <span class="fu">=</span> <span class="dv">42</span>;</a>
-<a class="sourceLine" id="cb11-6" title="6">    f <span class="fu">:</span> <span class="dt">Predef.Float</span> <span class="fu">=</span> <span class="fl">23.5</span>;</a>
-<a class="sourceLine" id="cb11-7" title="7">    b <span class="fu">:</span> <span class="dt">Bool</span> <span class="fu">=</span> <span class="dt">False</span> ;</a>
-<a class="sourceLine" id="cb11-8" title="8">}</a></code></pre></div>
-<p><a href="src/Params.gf">src/Params.gf</a></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" title="1">resource <span class="dt">SimpleTypes</span> <span class="fu">=</span> open <span class="dt">Predef</span>,<span class="dt">Prelude</span> <span class="kw">in</span> {</a>
-<a class="sourceLine" id="cb12-2" title="2">  oper</a>
-<a class="sourceLine" id="cb12-3" title="3">    s <span class="fu">:</span> <span class="dt">Str</span> <span class="fu">=</span> <span class="st">&quot;foo&quot;</span> <span class="fu">+</span> <span class="st">&quot;bar&quot;</span> ;</a>
-<a class="sourceLine" id="cb12-4" title="4">    st <span class="fu">:</span> <span class="dt">Str</span> <span class="fu">=</span> <span class="st">&quot;foo&quot;</span> <span class="fu">++</span> <span class="st">&quot;bar&quot;</span>;</a>
-<a class="sourceLine" id="cb12-5" title="5">    i <span class="fu">:</span> <span class="dt">Predef.Int</span> <span class="fu">=</span> <span class="dv">42</span>;</a>
-<a class="sourceLine" id="cb12-6" title="6">    f <span class="fu">:</span> <span class="dt">Predef.Float</span> <span class="fu">=</span> <span class="fl">23.5</span>;</a>
-<a class="sourceLine" id="cb12-7" title="7">    b <span class="fu">:</span> <span class="dt">Bool</span> <span class="fu">=</span> <span class="dt">False</span> ;</a>
-<a class="sourceLine" id="cb12-8" title="8">}</a></code></pre></div>
-<p><a href="src/Compounds.gf">src/Compounds.gf</a></p>
-<p><a href="src/Functions.gf">src/Functions.gf</a></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" title="1">resource <span class="dt">Functions</span> <span class="fu">=</span> open <span class="dt">Prelude</span>,<span class="dt">Predef</span> <span class="kw">in</span> {</a>
-<a class="sourceLine" id="cb13-2" title="2">  oper</a>
-<a class="sourceLine" id="cb13-3" title="3">    <span class="fu">succ</span> <span class="fu">:</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span>; <span class="co">-- Declaration</span></a>
-<a class="sourceLine" id="cb13-4" title="4">    <span class="fu">succ</span> i <span class="fu">=</span> plus i <span class="dv">1</span> ; <span class="co">-- Definition</span></a>
-<a class="sourceLine" id="cb13-5" title="5">    succ2 <span class="fu">:</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="fu">=</span> <span class="co">-- Declaration</span></a>
-<a class="sourceLine" id="cb13-6" title="6">      \i <span class="ot">-&gt;</span> plus i <span class="dv">1</span>; <span class="co">-- Definition</span></a>
-<a class="sourceLine" id="cb13-7" title="7">}</a></code></pre></div>
+<p><a href="src/SimpleTypes.gf" class="uri">src/SimpleTypes.gf</a></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb11-1" data-line-number="1">src<span class="fu">/</span>SimpleTypes.gf</a></code></pre></div>
+<p><a href="src/Params.gf" class="uri">src/Params.gf</a></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb12-1" data-line-number="1">src<span class="fu">/</span>SimpleTypes.gf</a></code></pre></div>
+<p><a href="src/Compounds.gf" class="uri">src/Compounds.gf</a></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb13-1" data-line-number="1">src<span class="fu">/</span>Compounds.gf</a></code></pre></div>
+<p><a href="src/Functions.gf" class="uri">src/Functions.gf</a></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb14-1" data-line-number="1">src<span class="fu">/</span>Functions.gf</a></code></pre></div>
 <p>As you can see in the examples above, for each variable we first give the type. That is best practice but in simple cases not necessary because GF can infer the type automatically. The only case where the type must be given is the function. But it is good discipline to annotate your types: it is like brushing your teeth.</p>
-<h2 id="compile-time-tokens-vs-run-time-strings">Compile-Time Tokens vs Run-Time Strings</h2>
+<h4 id="compile-time-tokens-vs-run-time-strings">Compile-Time Tokens vs Run-Time Strings</h4>
 <p>This is as good a time as any to point out the difference between the operators <code>+</code> and <code>++</code>. This is a common source of problems. GF scrupulously observes the difference between compile-time string operations and run-time string operations. But this distinction is more obvious to GF than it is to you, and can be the source of mysterious errors.</p>
 <p>GF’s idea of a sentence is a list of strings. In Python, a list of strings is written <code>['Italian','wine','is','delicious']</code>.</p>
 <p>In GF, it is written <code>&quot;Italian&quot; ++ &quot;wine&quot; ++ &quot;is&quot; ++ &quot;delicious&quot;</code>. Why no square brackets? Because GF isn’t a general purpose programming language: you hired it to do a very specific job in computational linguistics, so GF’s whole world is sentences and words. But if you really miss the square brackets, then as syntactic sugar, you could also say <code>[&quot;Italian wine is delicious&quot;]</code>.</p>
@@ -275,8 +168,9 @@ KeyError: &lt;Case.Gen: 2&gt;</code></pre>
 <p>This is very different to what Python does: Python quite happily manipulates strings at any time, because to Python, strings are just arrays of characters. Space is just another character. But to GF, words carry meaning; and run-time is too late to make up new words and new meanings.</p>
 <p>So how do you know whether a line of code is executing at compile-time or at run-time?</p>
 <p>We’ll get to that later.</p>
-<h2 id="lambda-abstractions">Lambda Abstractions</h2>
+<h4 id="lambda-abstractions">Lambda Abstractions</h4>
 <p>Back to the above code example, the last line – the function – is essentially a lambda expression like the one used in Python. The difference is that Python’s keyword <code>lambda</code> is shortened to a backslash (<code>\</code>), and the colon that separates the parameter from the function body is replaced by an arrow (`-&gt;}). The same arrows appear in Python’s type hints for functions.</p>
+<h4 id="examples">Examples</h4>
 <pre><code>&gt; cc s
 &quot;foobar&quot;
 0 msec
@@ -295,9 +189,9 @@ Prelude.False
 &gt; cc bar &quot;foo&quot;
 &quot;foobar&quot;
 0 msec</code></pre>
-<h2 id="compound-types-1">Compound Types</h2>
+<h4 id="compound-types-1">Compound Types</h4>
 <p>In GF can compose types to create new types. There are a few ways to construct compound types: records, tables and function types. GF expects you to <em>declare</em> the type, which amounts to saying “this is the shape of the thing”. You can then <em>define</em> a variable that matches the type.</p>
-<p>Both tables and records can be seen as special forms of dictionaries. Tables are mappings from grammatical features to other values. A simple example are inflection tables that map e.g. from gender and number to the correct word form. Records usually are used to keep subparts of phrases as well as inherent grammatical features like the gender in nouns.</p>
+<p>Both tables and records can be seen as special forms of dictionaries. Tables are mappings from grammatical features to other values. A simple example are inflection tables that map e.g. from gender and number to the correct word form. Records usually are used to keep subparts of phrases as well as inherent grammatical features like the gender in nouns.</p>
 <pre><code>  cat    -- from the abstract grammar
     Food;
   fun
@@ -313,7 +207,10 @@ Prelude.False
     Food = { g : Gender ; s : Number =&gt; Case =&gt; Str }
     -- in German, nouns have inherent gender and are inflected by case and number</code></pre>
 <p>In Python, you’re probably used to sounding out types in your head, like “an array of dicts from string to int”.</p>
+<h4 id="exercise-2">Exercise</h4>
+<blockquote>
 <p>Can you sound out GF’s types?</p>
+</blockquote>
 <p>In English, the “Food” type is a record with a field <code>s</code> whose value is a table keyed by Number returning a String.</p>
 <p>In German, the “Food” type is a record with a field <code>g</code> whose value is a Gender, and a field <code>s</code> whose value is a table keyed by Number returning a table keyed by Case returning a String.</p>
 <p>It is important to be able to sound out GF’s types in your head, because the vast majority of compile-time frustrations in statically typed languages have to do with getting the types wrong; but once you do get the types right, everything else seems to fall into place.</p>
@@ -324,8 +221,8 @@ Prelude.False
 <p>In GF, once you have a complex data structured defined, you can pull values out of it using <code>.</code> (for records) and <code>!</code> (for tables).</p>
 <p>From earlier in this tutorial, we know that records are basically dictionaries. Given a key, you reach into the record and pull out the value corresponding to the key. Record keys must be known at compile-time.</p>
 <p>Unlike Python, you can’t put a record key into a variable. Python lets you say</p>
-<pre><code>mykey = 'foo'
-{ 'foo' : 2, 'bar : 4 }[mykey]</code></pre>
+<pre><code>mykey = &#39;foo&#39;
+{ &#39;foo&#39; : 2, &#39;bar : 4 }[mykey]</code></pre>
 <p>But you can’t do that in GF.</p>
 <p>Functions map inputs to output via a bunch of arbitrary computation. Given some input, a function thinks hard and returns some result.</p>
 <p>What’s a table? Something in between.</p>
@@ -333,50 +230,28 @@ Prelude.False
 <p>A table is a bit like a record: records use <code>.</code> while tables use <code>!</code>. Records are constructed by <code>{ foo = bar }</code> while tables are constructed by <code>table { foo =&gt; bar }</code>. These similarities are also not accidental.</p>
 <p>You can think of a table as a fancy case statement. What’s a case statement? In Python, switch, or case, statements are <a href="https://www.python.org/dev/peps/pep-3103/">… um, not gonna happen.</a> Oops! Is Python the only language that doesn’t have a case statement?!</p>
 <p>Never mind, we will explain case statements from first principles. It’s a common pattern: given a thing, you step through an ordered list of alternatives, testing each alternative to see if the thing is equal to it. When a match is found, control branches accordingly. Here’s what a case statement looks like in C++. It takes an int and prints something to output.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb18-1" title="1"><span class="cf">switch</span>(<span class="dv">1</span>) {</a>
-<a class="sourceLine" id="cb18-2" title="2">    <span class="cf">case</span> <span class="dv">1</span>: { <span class="dt">int</span> x = <span class="dv">0</span>;</a>
-<a class="sourceLine" id="cb18-3" title="3">              <span class="bu">std::</span>cout &lt;&lt; x &lt;&lt; <span class="ch">'</span><span class="sc">\n</span><span class="ch">'</span>;</a>
-<a class="sourceLine" id="cb18-4" title="4">              <span class="cf">break</span>;</a>
-<a class="sourceLine" id="cb18-5" title="5">            }</a>
-<a class="sourceLine" id="cb18-6" title="6">    <span class="cf">case</span> <span class="dv">2</span> : cout &lt;&lt; <span class="ch">'2'</span>;</a>
-<a class="sourceLine" id="cb18-7" title="7">             <span class="cf">break</span>;</a>
-<a class="sourceLine" id="cb18-8" title="8">    <span class="cf">default</span>: <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;default</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// no error</span></a>
-<a class="sourceLine" id="cb18-9" title="9">             <span class="cf">break</span>;</a>
-<a class="sourceLine" id="cb18-10" title="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="cf">switch</span>(<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">    <span class="cf">case</span> <span class="dv">1</span>: { <span class="dt">int</span> x = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">              <span class="bu">std::</span>cout &lt;&lt; x &lt;&lt; <span class="ch">&#39;</span><span class="sc">\n</span><span class="ch">&#39;</span>;</a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">              <span class="cf">break</span>;</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">            }</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">    <span class="cf">case</span> <span class="dv">2</span> : cout &lt;&lt; <span class="ch">&#39;2&#39;</span>;</a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">             <span class="cf">break</span>;</a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">    <span class="cf">default</span>: <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;default</span><span class="sc">\n</span><span class="st">&quot;</span>; <span class="co">// no error</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">             <span class="cf">break</span>;</a>
+<a class="sourceLine" id="cb19-10" data-line-number="10">}</a></code></pre></div>
 <p>In this C++ example the input to the switch was hardcoded but in practice you would typically use a variable in place of the `1}.</p>
 <p>In GF, a table lets you step through an ordered list of patterns, testing your string against each pattern. When a match is found, the relevant computation is returned. But the test is not always an equality test: it can be a regexp-like test.</p>
 <p>In fact, case statements in GF are syntactic sugar for tables. A case statement sets up a table and immediately looks up your given key in it. The GF tutorial offers a great example of a table/case statement under <a href="http://www.grammaticalframework.org/doc/tutorial/gf-tutorial.html#toc59">smart paradigms</a>.</p>
 <p>Computer scientists call tables “finite functions”: as the GF reference manual says, <em>it is possible to finitely enumerate all argument-value pairs; this, in turn, is possible because the argument types are finite.</em></p>
 <p>Hence the rule: values in tables all have to have the same type while records can contain values of different types.</p>
 <p>The keys in records must be known in advance, and are matched exactly, while tables perform pattern-matching against the “lookup key”.</p>
-<p>To complete the picture, let’s talk about functions. If records are accessed using <code>.</code> and tables are looked-up using <code>!</code>, then functions are applied using ‘<code></code>’ – a space.</p>
+<p>To complete the picture, let’s talk about functions. If records are accessed using <code>.</code> and tables are looked-up using <code>!</code>, then functions are applied using ‘` `’ – a space.</p>
 <p>In Python, functions are called with parameters: <code>myfun(arg1, arg2)</code>.</p>
 <p>In GF, that looks like: <code>myfun arg1 arg2</code>. The syntax descends from the mathematical tradition via the lambda calculus and Haskell.</p>
 <p>To consolidate, let’s look at some examples.</p>
-<p><a href="src/Comparison.gf">src/Comparison.gf</a></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb19-1" title="1">resource <span class="dt">Comparison</span> <span class="fu">=</span> open <span class="dt">Prelude</span> <span class="kw">in</span> {</a>
-<a class="sourceLine" id="cb19-2" title="2">  oper</a>
-<a class="sourceLine" id="cb19-3" title="3">    <span class="co">-- first we declare types</span></a>
-<a class="sourceLine" id="cb19-4" title="4">    myrecord <span class="fu">:</span> { one   <span class="fu">:</span> <span class="dt">Predef.Int</span> ;</a>
-<a class="sourceLine" id="cb19-5" title="5">                 two   <span class="fu">:</span> <span class="dt">Predef.Int</span> ;</a>
-<a class="sourceLine" id="cb19-6" title="6">                 three <span class="fu">:</span> <span class="dt">Predef.Int</span> ;</a>
-<a class="sourceLine" id="cb19-7" title="7">                 four  <span class="fu">:</span> <span class="dt">Predef.Int</span> };</a>
-<a class="sourceLine" id="cb19-8" title="8">    mytable  <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">=&gt;</span> <span class="dt">Predef.Int</span>;</a>
-<a class="sourceLine" id="cb19-9" title="9">    myfunc   <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Predef.Int</span>;</a>
-<a class="sourceLine" id="cb19-10" title="10"></a>
-<a class="sourceLine" id="cb19-11" title="11">    <span class="co">-- then we define values</span></a>
-<a class="sourceLine" id="cb19-12" title="12">    myrecord <span class="fu">=</span>        { one <span class="fu">=</span> <span class="dv">1</span> ; two <span class="fu">=</span> <span class="dv">2</span> ; three <span class="fu">=</span> <span class="dv">3</span> ; four <span class="fu">=</span> <span class="dv">4</span> };</a>
-<a class="sourceLine" id="cb19-13" title="13">    mytable  <span class="fu">=</span> table { <span class="st">&quot;one&quot;</span>   <span class="ot">=&gt;</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb19-14" title="14">                     ; <span class="st">&quot;two&quot;</span>   <span class="ot">=&gt;</span> <span class="dv">2</span></a>
-<a class="sourceLine" id="cb19-15" title="15">                     ; <span class="st">&quot;three&quot;</span> <span class="ot">=&gt;</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb19-16" title="16">                     ; <span class="st">&quot;four&quot;</span>  <span class="ot">=&gt;</span> <span class="dv">4</span></a>
-<a class="sourceLine" id="cb19-17" title="17">                     ; _       <span class="ot">=&gt;</span> <span class="dv">0</span> };</a>
-<a class="sourceLine" id="cb19-18" title="18">    myfunc s <span class="fu">=</span> ifTok <span class="dt">Predef.Int</span> s <span class="st">&quot;one&quot;</span>   <span class="dv">1</span>   (</a>
-<a class="sourceLine" id="cb19-19" title="19">               ifTok <span class="dt">Predef.Int</span> s <span class="st">&quot;two&quot;</span>   <span class="dv">2</span>   (</a>
-<a class="sourceLine" id="cb19-20" title="20">               ifTok <span class="dt">Predef.Int</span> s <span class="st">&quot;three&quot;</span> <span class="dv">3</span>   (</a>
-<a class="sourceLine" id="cb19-21" title="21">               ifTok <span class="dt">Predef.Int</span> s <span class="st">&quot;four&quot;</span>  <span class="dv">4</span> <span class="dv">0</span>)));</a>
-<a class="sourceLine" id="cb19-22" title="22"></a>
-<a class="sourceLine" id="cb19-23" title="23">}</a></code></pre></div>
+<p><a href="src/Comparison.gf" class="uri">src/Comparison.gf</a></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb20-1" data-line-number="1">src<span class="fu">/</span>Comparison.gf</a></code></pre></div>
 <p>A syntax note: unlike Python, every statement in GF has to be terminated with a <code>;</code> (semicolon). Semicolons are also used as record and table separators. In Python the separator is a comma, not a semicolon.</p>
 <pre><code>output:
 
@@ -395,215 +270,57 @@ Prelude.False
 
 &gt; cc myfunc &quot;bogus&quot;
 0</code></pre>
-<pre><code>-- under construction: let us talk about the three functiony bits of GF:
+<!-- 
+```
+-- under construction: let us talk about the three functiony bits of GF:
   lin
   def
-  oper</code></pre>
-<p>In the last kind of modules (we want to look at here) are concrete modules. Here we can use most of the things we have seen for the resource modules. But in the end it boils down to using strings in different ways. We store strings in record fields, select the right strings from tables and put them together at the right point. Sometimes we need to additionally store grammatical features. So we need strings, tables, records, and <code>param</code> types.</p>
-<!-- 
+  oper
+```
+
+
 % TODO: talk about oper  Thing : Type = { ... };
 % TODO: talk about param Thing : One | Two | Three; 
 -->
+<h3 id="abstract-modules">Abstract modules</h3>
+<p>In the abstract syntax we do not really have to care about types. Here we think linguistically and treat it more or less like context-free grammars, i.e. categories and syntax rules.</p>
+<p>Abstract modules are language-independent, and describe the semantic categories and linearization relationships at a very high level. If you have the idea that “Italian wine is delicious”, you might break that down as a predicate sentence (<em>x</em> <em>y</em> is <em>z</em>) which has an adjectival noun phrase (<em>x</em> = Italian, <em>y</em> = wine), a copula (“is”), and an adjective (<em>z</em> = delicious).</p>
+<p>The abstract grammar would concern itself primarily with outlining the parts of speech (x, y, z) and how they fit together (e.g. nouns can be modified by adjectives), and only mention in passing that wine is a particular instance of a noun, and Italianness and deliciousness are adjectival modifiers of interest.</p>
+<h3 id="concrete-modules">Concrete modules</h3>
+<p>In the last kind of modules (we want to look at here) are concrete modules. Here we can use most of the things we have seen for the resource modules. But in the end it boils down to using strings in different ways. We store strings in record fields, select the right strings from tables and put them together at the right point. Sometimes we need to additionally store grammatical features. So we need strings, tables, records, and <code>param</code> types.</p>
+<p>Concrete modules are where the language-specific details appear: if your application translates between English and Italian, you would have two concrete modules. One module knows that wine is spelled “wine” and the other knows that wine is spelled “vino”.</p>
 <h2 id="lists">Lists</h2>
 <p>As a Python programmer you most likely encountered lists. They are a handy data structure that can store lots of different types of data. We have seen some examples about lists in Python before. GF also offers (very limited) support for lists. But first have a look at lists in Python and general.</p>
 <p>In Python, as we have seen before, lists are a sequence of values of potentially different types. However, most often all values in a list have the same type. There are many built-in functions that work on list. To construct a list in Python we can either create it by listing all its elements explicitly or by starting with the empty list <code>[]</code> and <code>append</code>ing elements at the end. To deconstruct the list, we can <code>pop</code> elements from the back of the list. In LISP-speak that makes it a SNOC list (that is spelled CONS backwards, the LISP way of constructing lists). One important thing to remember about Python lists is, that it is possible to completely deconstruct a list that has been constructed before.</p>
 <p>In GF we can also have lists, e.g. as list categories. They can be used to model conjunction of several constituents. If we have the category <code>S</code> we can also define the category <code>ListS</code> which models a list of <code>S</code> elements. To construct this list, we need two operations, <code>BaseS</code> to generate a list of category <code>S</code> and the LISPy operation <code>ConsS</code> that takes an element of category <code>S</code> and a list of category <code>S</code> and extends the list by one element of this category. This all might sound a little vague, so let’s have a look at a simple example, a list of digits. The grammars are the following:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" title="1">abstract <span class="dt">ListAbs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb23-2" title="2">  cat</a>
-<a class="sourceLine" id="cb23-3" title="3">    <span class="dt">Digit</span>; <span class="dt">ListDigit</span> ;</a>
-<a class="sourceLine" id="cb23-4" title="4">  fun</a>
-<a class="sourceLine" id="cb23-5" title="5">    <span class="dt">BaseDigit</span> <span class="fu">:</span> <span class="dt">ListDigit</span> ;</a>
-<a class="sourceLine" id="cb23-6" title="6">    <span class="dt">ConsDigit</span> <span class="fu">:</span> <span class="dt">Digit</span> <span class="ot">-&gt;</span> <span class="dt">ListDigit</span> <span class="ot">-&gt;</span> <span class="dt">ListDigit</span> ;</a>
-<a class="sourceLine" id="cb23-7" title="7">    one, two, three, four, five, six, seven, eight, nine, zero <span class="fu">:</span> <span class="dt">Digit</span> ;</a>
-<a class="sourceLine" id="cb23-8" title="8">}</a>
-<a class="sourceLine" id="cb23-9" title="9">      </a>
-<a class="sourceLine" id="cb23-10" title="10">      </a></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" title="1">concrete <span class="dt">List</span> <span class="kw">of</span> <span class="dt">ListAbs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb24-2" title="2">  lincat</a>
-<a class="sourceLine" id="cb24-3" title="3">    <span class="dt">Digit</span>,<span class="dt">ListDigit</span> <span class="fu">=</span> <span class="dt">Str</span> ;</a>
-<a class="sourceLine" id="cb24-4" title="4">  lin</a>
-<a class="sourceLine" id="cb24-5" title="5">    <span class="dt">BaseDigit</span> <span class="fu">=</span> <span class="st">&quot;&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-6" title="6">    <span class="dt">ConsDigit</span> d ds <span class="fu">=</span> d <span class="fu">++</span> <span class="st">&quot;,&quot;</span> <span class="fu">++</span> ds ;</a>
-<a class="sourceLine" id="cb24-7" title="7">    one   <span class="fu">=</span> <span class="st">&quot;1&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-8" title="8">    two   <span class="fu">=</span> <span class="st">&quot;2&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-9" title="9">    three <span class="fu">=</span> <span class="st">&quot;3&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-10" title="10">    four  <span class="fu">=</span> <span class="st">&quot;4&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-11" title="11">    five  <span class="fu">=</span> <span class="st">&quot;5&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-12" title="12">    six   <span class="fu">=</span> <span class="st">&quot;6&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-13" title="13">    seven <span class="fu">=</span> <span class="st">&quot;7&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-14" title="14">    eight <span class="fu">=</span> <span class="st">&quot;8&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-15" title="15">    nine  <span class="fu">=</span> <span class="st">&quot;9&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-16" title="16">    zero  <span class="fu">=</span> <span class="st">&quot;0&quot;</span> ;</a>
-<a class="sourceLine" id="cb24-17" title="17">}</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb23-1" data-line-number="1">src<span class="fu">/</span>ListAbs.gf</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb24-1" data-line-number="1">src<span class="fu">/</span>List.gf</a></code></pre></div>
 <p>With these grammars we can generate random sequences of digits separated by spaces. You may notice that in the concrete syntax we just say that both Digit and ListDigit have the concrete type <code>Str</code>. That might seem weird but works for the moment, we will go more into detail about this in a moment. But what if we want to put commas in between instead? If we just write <code>ConsDigit d ds = d ++ &quot;,&quot; ++ ds ;</code> instead of <code>ConsDigit d ds = d ++  ds ;</code>, we will see, that commas appear also at the end of the list. Is there a way we can avoid this? In defined the base case <code>BaseDigit</code> just as the empty string. In the CONS we then concatenate the new digit and a comma in front of the previous list, which can be empty. To avoid this we might want to have a different base case which requires that a list consists of at least one element. We can see the necessary changes in these grammars:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" title="1">abstract <span class="dt">List2Abs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb25-2" title="2">  cat</a>
-<a class="sourceLine" id="cb25-3" title="3">    <span class="dt">Digit</span>; <span class="dt">ListDigit</span> ;</a>
-<a class="sourceLine" id="cb25-4" title="4">  fun</a>
-<a class="sourceLine" id="cb25-5" title="5">    <span class="dt">BaseDigit</span> <span class="fu">:</span> <span class="dt">Digit</span> <span class="ot">-&gt;</span> <span class="dt">ListDigit</span> ;</a>
-<a class="sourceLine" id="cb25-6" title="6">    <span class="dt">ConsDigit</span> <span class="fu">:</span> <span class="dt">Digit</span> <span class="ot">-&gt;</span> <span class="dt">ListDigit</span> <span class="ot">-&gt;</span> <span class="dt">ListDigit</span> ;</a>
-<a class="sourceLine" id="cb25-7" title="7">    one, two, three, four, five, six, seven, eight, nine, zero <span class="fu">:</span> <span class="dt">Digit</span> ;</a>
-<a class="sourceLine" id="cb25-8" title="8">}</a>
-<a class="sourceLine" id="cb25-9" title="9">      </a>
-<a class="sourceLine" id="cb25-10" title="10">      </a></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" title="1">concrete <span class="dt">List2</span> <span class="kw">of</span> <span class="dt">List2Abs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb26-2" title="2">  lincat</a>
-<a class="sourceLine" id="cb26-3" title="3">    <span class="dt">Digit</span>,<span class="dt">ListDigit</span> <span class="fu">=</span> <span class="dt">Str</span> ;</a>
-<a class="sourceLine" id="cb26-4" title="4">  lin</a>
-<a class="sourceLine" id="cb26-5" title="5">    <span class="dt">BaseDigit</span> d <span class="fu">=</span> d ;</a>
-<a class="sourceLine" id="cb26-6" title="6">    <span class="dt">ConsDigit</span> d ds <span class="fu">=</span> d <span class="fu">++</span> <span class="st">&quot;,&quot;</span> <span class="fu">++</span> ds ;</a>
-<a class="sourceLine" id="cb26-7" title="7">    one   <span class="fu">=</span> <span class="st">&quot;1&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-8" title="8">    two   <span class="fu">=</span> <span class="st">&quot;2&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-9" title="9">    three <span class="fu">=</span> <span class="st">&quot;3&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-10" title="10">    four  <span class="fu">=</span> <span class="st">&quot;4&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-11" title="11">    five  <span class="fu">=</span> <span class="st">&quot;5&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-12" title="12">    six   <span class="fu">=</span> <span class="st">&quot;6&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-13" title="13">    seven <span class="fu">=</span> <span class="st">&quot;7&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-14" title="14">    eight <span class="fu">=</span> <span class="st">&quot;8&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-15" title="15">    nine  <span class="fu">=</span> <span class="st">&quot;9&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-16" title="16">    zero  <span class="fu">=</span> <span class="st">&quot;0&quot;</span> ;</a>
-<a class="sourceLine" id="cb26-17" title="17">}</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb25-1" data-line-number="1">src<span class="fu">/</span>List2Abs.gf</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb26-1" data-line-number="1">src<span class="fu">/</span>List2.gf</a></code></pre></div>
 <p>This solves our problem with the commas. Probably we can come up with use cases where the base list should have at least n elements, for example in natural languages the conjunction of constituents requires at least two elements.</p>
 <p>At some point it becomes tedious to define the list categories and the corresponding <code>BaseC</code> and <code>ConsC</code> functions in the abstract syntax. For that reason GF provides some syntactic sugar for creating list categories. Instead of <code>ListC</code> we can write in a very Haskell-like style <code>[C]</code> to create a list category for category <code>C</code>. This adds some additional magic which also creates the abstract definition of <code>BaseC</code> and <code>ConsC</code> without explicitly mentioning it. To provide the flexibility about the base case we discussed before we can even write <code>[C]{n}</code> which means the function <code>BaseC</code> is defined in the following way <code>BaseC : C -&gt; ... -&gt; in total n times -&gt; ... -&gt; C -&gt; ListC</code>. With this trick we can redefine the grammar <code>List3Abs</code> the following way:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" title="1">abstract <span class="dt">List3Abs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb27-2" title="2">  cat</a>
-<a class="sourceLine" id="cb27-3" title="3">    <span class="dt">Digit</span>; [<span class="dt">Digit</span>]{<span class="dv">1</span>} ;</a>
-<a class="sourceLine" id="cb27-4" title="4">  fun</a>
-<a class="sourceLine" id="cb27-5" title="5">    one, two, three, four, five, six, seven, eight, nine, zero <span class="fu">:</span> <span class="dt">Digit</span> ;</a>
-<a class="sourceLine" id="cb27-6" title="6">}</a>
-<a class="sourceLine" id="cb27-7" title="7">      </a>
-<a class="sourceLine" id="cb27-8" title="8">      </a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb27-1" data-line-number="1">src<span class="fu">/</span>List3Abs.gf</a></code></pre></div>
 <p>But what if we want to add a function <code>head : ListDigit -&gt; Digit</code> which gives us the first element of a list? Currently we are unable to do that because behind the scenes we are just concatenating strings. And we know that this operation is not reversible. Our problem is, that only on the surface, i.e. in the abstract syntax, the list categories look roughly like lists as we can find them in other programming languages as well. In the concrete syntax we can decide for ourselves how we want to treat lists with the tools and types GF provides.</p>
 <p>Back to our <code>head</code> function. To be able to implement it, we need to remember which element is at the front of the list. The usual approach to remember things in GF is by using records and introduce additional record fields. So let us implement a list where the base case is the empty list, i.e. the empty string, <code>ConsS</code> attaches the element in the front and we will have a <code>head</code> function to give us the last element added to the list or the empty string if the list is empty. The result is the following:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" title="1">abstract <span class="dt">List4Abs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb28-2" title="2">  cat</a>
-<a class="sourceLine" id="cb28-3" title="3">    <span class="dt">Digit</span>; [<span class="dt">Digit</span>] ;</a>
-<a class="sourceLine" id="cb28-4" title="4">  fun</a>
-<a class="sourceLine" id="cb28-5" title="5">    one, two, three, four, five, six, seven, eight, nine, zero <span class="fu">:</span> <span class="dt">Digit</span> ;</a>
-<a class="sourceLine" id="cb28-6" title="6">    <span class="fu">head</span> <span class="fu">:</span> [<span class="dt">Digit</span>] <span class="ot">-&gt;</span> <span class="dt">Digit</span> ;</a>
-<a class="sourceLine" id="cb28-7" title="7">}</a>
-<a class="sourceLine" id="cb28-8" title="8">      </a>
-<a class="sourceLine" id="cb28-9" title="9">      </a></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" title="1">concrete <span class="dt">List4</span> <span class="kw">of</span> <span class="dt">List4Abs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb29-2" title="2">  lincat</a>
-<a class="sourceLine" id="cb29-3" title="3">    <span class="dt">Digit</span> <span class="fu">=</span> <span class="dt">Str</span> ;</a>
-<a class="sourceLine" id="cb29-4" title="4">    [<span class="dt">Digit</span>] <span class="fu">=</span> { hd <span class="fu">:</span> <span class="dt">Str</span> ; tl <span class="fu">:</span> <span class="dt">Str</span> } ;</a>
-<a class="sourceLine" id="cb29-5" title="5">  lin</a>
-<a class="sourceLine" id="cb29-6" title="6">    <span class="dt">BaseDigit</span> <span class="fu">=</span> { hd <span class="fu">=</span> <span class="st">&quot;&quot;</span> ; tl <span class="fu">=</span> <span class="st">&quot;&quot;</span> } ;</a>
-<a class="sourceLine" id="cb29-7" title="7">    <span class="dt">ConsDigit</span> d ds <span class="fu">=</span> { hd <span class="fu">=</span> d ; tl <span class="fu">=</span> ds<span class="fu">.</span>hd <span class="fu">++</span> ds<span class="fu">.</span>tl };</a>
-<a class="sourceLine" id="cb29-8" title="8">    <span class="fu">head</span> ds <span class="fu">=</span> ds<span class="fu">.</span>hd ;</a>
-<a class="sourceLine" id="cb29-9" title="9">    one   <span class="fu">=</span> <span class="st">&quot;1&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-10" title="10">    two   <span class="fu">=</span> <span class="st">&quot;2&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-11" title="11">    three <span class="fu">=</span> <span class="st">&quot;3&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-12" title="12">    four  <span class="fu">=</span> <span class="st">&quot;4&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-13" title="13">    five  <span class="fu">=</span> <span class="st">&quot;5&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-14" title="14">    six   <span class="fu">=</span> <span class="st">&quot;6&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-15" title="15">    seven <span class="fu">=</span> <span class="st">&quot;7&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-16" title="16">    eight <span class="fu">=</span> <span class="st">&quot;8&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-17" title="17">    nine  <span class="fu">=</span> <span class="st">&quot;9&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-18" title="18">    zero  <span class="fu">=</span> <span class="st">&quot;0&quot;</span> ;</a>
-<a class="sourceLine" id="cb29-19" title="19">}</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb28-1" data-line-number="1">src<span class="fu">/</span>List4Abs.gf</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb29-1" data-line-number="1">src<span class="fu">/</span>List4.gf</a></code></pre></div>
 <p>Instead of just a string we have two record fields. The first (<code>hd</code>) holds the head of the list, i.e. the first element, the second one (<code>tl</code>) hold the tail, the rest of the list. When we add an element to the list, we concatenate the old head with the old tail and replace the head with the new element. This way of storing the information works great for the <code>head</code> function. But could we also implement a function <code>tail : [Digit] -&gt; [Digit]</code> that for some list returns the list without the first element? The answer at the moment is no. We would have to split off the first element of <code>tl</code> to get the new head of the resulting list. And we already talked about the fact that it is impossible to split the string here.</p>
 <p>That shows that lists in GF are rather limited compared to other programming languages, but that does not make them useless. In most use cases of GF we don’t need the full power of lists. For example if we want to introduce conjunctions between our digits, the result in English would be for example something like “1, 2 and 3” or “23, 42 or 5”. That means we do not have to take apart the list, instead we only need a gap between the next to last and the last element to put the conjunction in. That means the list should be pretty similar to what we just did.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" title="1">abstract <span class="dt">List5Abs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb30-2" title="2">  cat</a>
-<a class="sourceLine" id="cb30-3" title="3">    <span class="dt">Digit</span>; [<span class="dt">Digit</span>]{<span class="dv">2</span>} ; <span class="dt">Conj</span> ;</a>
-<a class="sourceLine" id="cb30-4" title="4">  fun</a>
-<a class="sourceLine" id="cb30-5" title="5">    one, two, three, four, five, six, seven, eight, nine, zero <span class="fu">:</span> <span class="dt">Digit</span> ;</a>
-<a class="sourceLine" id="cb30-6" title="6">    <span class="dt">ConjDigit</span> <span class="fu">:</span> <span class="dt">Conj</span> <span class="ot">-&gt;</span> [<span class="dt">Digit</span>] <span class="ot">-&gt;</span> <span class="dt">Digit</span> ;</a>
-<a class="sourceLine" id="cb30-7" title="7">    <span class="fu">and</span> <span class="fu">:</span> <span class="dt">Conj</span> ;</a>
-<a class="sourceLine" id="cb30-8" title="8">    <span class="fu">or</span> <span class="fu">:</span> <span class="dt">Conj</span> ;</a>
-<a class="sourceLine" id="cb30-9" title="9">}</a>
-<a class="sourceLine" id="cb30-10" title="10">      </a>
-<a class="sourceLine" id="cb30-11" title="11">      </a></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" title="1">concrete <span class="dt">List5</span> <span class="kw">of</span> <span class="dt">List5Abs</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb31-2" title="2">  lincat</a>
-<a class="sourceLine" id="cb31-3" title="3">    <span class="dt">Digit</span>, <span class="dt">Conj</span> <span class="fu">=</span> <span class="dt">Str</span> ;</a>
-<a class="sourceLine" id="cb31-4" title="4">    [<span class="dt">Digit</span>] <span class="fu">=</span> { <span class="fu">init</span> <span class="fu">:</span> <span class="dt">Str</span> ; <span class="fu">last</span> <span class="fu">:</span> <span class="dt">Str</span> } ;</a>
-<a class="sourceLine" id="cb31-5" title="5">  lin</a>
-<a class="sourceLine" id="cb31-6" title="6">    <span class="dt">BaseDigit</span> d1 d2 <span class="fu">=</span> { <span class="fu">init</span> <span class="fu">=</span> d1 ; <span class="fu">last</span> <span class="fu">=</span> d2 } ;</a>
-<a class="sourceLine" id="cb31-7" title="7">    <span class="dt">ConsDigit</span> d ds <span class="fu">=</span> { <span class="fu">init</span> <span class="fu">=</span> ds<span class="fu">.init</span> <span class="fu">++</span> <span class="st">&quot;,&quot;</span> <span class="fu">++</span> ds<span class="fu">.last</span> ; <span class="fu">last</span> <span class="fu">=</span> d };</a>
-<a class="sourceLine" id="cb31-8" title="8">    <span class="dt">ConjDigit</span> c ds <span class="fu">=</span> ds<span class="fu">.init</span> <span class="fu">++</span> c <span class="fu">++</span> ds<span class="fu">.last</span> ;</a>
-<a class="sourceLine" id="cb31-9" title="9">    one   <span class="fu">=</span> <span class="st">&quot;1&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-10" title="10">    two   <span class="fu">=</span> <span class="st">&quot;2&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-11" title="11">    three <span class="fu">=</span> <span class="st">&quot;3&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-12" title="12">    four  <span class="fu">=</span> <span class="st">&quot;4&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-13" title="13">    five  <span class="fu">=</span> <span class="st">&quot;5&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-14" title="14">    six   <span class="fu">=</span> <span class="st">&quot;6&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-15" title="15">    seven <span class="fu">=</span> <span class="st">&quot;7&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-16" title="16">    eight <span class="fu">=</span> <span class="st">&quot;8&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-17" title="17">    nine  <span class="fu">=</span> <span class="st">&quot;9&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-18" title="18">    zero  <span class="fu">=</span> <span class="st">&quot;0&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-19" title="19">    <span class="fu">and</span> <span class="fu">=</span> <span class="st">&quot;and&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-20" title="20">    <span class="fu">or</span> <span class="fu">=</span> <span class="st">&quot;or&quot;</span> ;</a>
-<a class="sourceLine" id="cb31-21" title="21">}</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb30-1" data-line-number="1">src<span class="fu">/</span>List5Abs.gf</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb31-1" data-line-number="1">src<span class="fu">/</span>List5.gf</a></code></pre></div>
 <p>The list we had in the previous example was kind of a classical CONS list, i.e. we start with an empty list and add elements in the front. Now we have a SNOC list again, a list where we add elements in the end. Also for the lists we want to use with conjunctions it does not make sense to have less than two elements, e.g. “and 3” or “42 or” are both not really well-formed and complete statements. For that reason we use the <code>[C]{n}</code> syntax again to ask the base case to have two parameters. As a result the shortest lists we can have have at least two elements. When we add elements to the list, we put a comma between the previous list and the previous last element. This is in many languages the expected behavior, that in longer coordinating expressions we only have the conjunction in the end and commas in all other places.</p>
 <p>This section showed how lists in GF work compared to other programming languages but also how they still can be very useful to model natural language phenomena.</p>
 <h1 id="context-free-grammars">Context-free Grammars</h1>
 <p>A simple form of grammars are the so-called context-free grammars. They can be used in lots of applications both in computer science and linguistics but have limitations that encourage us to use more expressive formalisms like GF. We start with simple grammars in Python with NLTK, then show to translate them to a format that also works in GF and finally show how to implement them in the full GF formalism.</p>
 <h2 id="context-free-grammars-in-pythonnltk">Context-free Grammars in Python/NLTK</h2>
-<p><a href="src/NLTK-CF.py">src/NLTK-CF.py</a></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
-<a class="sourceLine" id="cb32-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
-<a class="sourceLine" id="cb32-4" title="4"><span class="st">  S -&gt; NP VP</span></a>
-<a class="sourceLine" id="cb32-5" title="5"><span class="st">  NP -&gt; Det N</span></a>
-<a class="sourceLine" id="cb32-6" title="6"><span class="st">  VP -&gt; IV</span></a>
-<a class="sourceLine" id="cb32-7" title="7"><span class="st">  Det -&gt; 'the'</span></a>
-<a class="sourceLine" id="cb32-8" title="8"><span class="st">  N -&gt; 'man'</span></a>
-<a class="sourceLine" id="cb32-9" title="9"><span class="st">  IV -&gt; 'walks'</span></a>
-<a class="sourceLine" id="cb32-10" title="10"><span class="st">  &quot;&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb32-11" title="11"><span class="co">#&gt;&gt;&gt; grammar</span></a>
-<a class="sourceLine" id="cb32-12" title="12"><span class="co">#&lt;Grammar with 14 productions&gt;</span></a>
-<a class="sourceLine" id="cb32-13" title="13"><span class="co">#&gt;&gt;&gt; grammar.start()</span></a>
-<a class="sourceLine" id="cb32-14" title="14"><span class="co">#S</span></a>
-<a class="sourceLine" id="cb32-15" title="15"><span class="co">#&gt;&gt;&gt; grammar.productions()</span></a>
-<a class="sourceLine" id="cb32-16" title="16"><span class="co">#[S -&gt; NP VP, NP -&gt; Det N, VP -&gt; IV, Det -&gt; 'the', N -&gt; 'man', IV -&gt; 'walks']</span></a>
-<a class="sourceLine" id="cb32-17" title="17">parser <span class="op">=</span> ChartParser(grammar)</a>
-<a class="sourceLine" id="cb32-18" title="18">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walks&quot;</span>))</a>
-<a class="sourceLine" id="cb32-19" title="19"><span class="co">#&gt;&gt;&gt; parses</span></a>
-<a class="sourceLine" id="cb32-20" title="20"><span class="co">#[Tree('S', [Tree('NP', [Tree('Det', ['the']), Tree('N', ['man'])]), Tree('VP', [Tree('IV', ['walks'])])])]</span></a></code></pre></div>
-<p><a href="src/NLTK-CF2.py">src/NLTK-CF2.py</a></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
-<a class="sourceLine" id="cb33-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="st">  S -&gt; NP VP</span></a>
-<a class="sourceLine" id="cb33-5" title="5"><span class="st">  NP -&gt; Det N</span></a>
-<a class="sourceLine" id="cb33-6" title="6"><span class="st">  VP -&gt; IV</span></a>
-<a class="sourceLine" id="cb33-7" title="7"><span class="st">  Det -&gt; 'the'</span></a>
-<a class="sourceLine" id="cb33-8" title="8"><span class="st">  N -&gt; 'man'</span></a>
-<a class="sourceLine" id="cb33-9" title="9"><span class="st">  N -&gt; 'men'</span></a>
-<a class="sourceLine" id="cb33-10" title="10"><span class="st">  IV -&gt; 'walks'</span></a>
-<a class="sourceLine" id="cb33-11" title="11"><span class="st">  IV -&gt; 'walk'</span></a>
-<a class="sourceLine" id="cb33-12" title="12"><span class="st">  &quot;&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb33-13" title="13">parser <span class="op">=</span> ChartParser(grammar)</a>
-<a class="sourceLine" id="cb33-14" title="14">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walk&quot;</span>))</a>
-<a class="sourceLine" id="cb33-15" title="15"><span class="co">#&gt;&gt;&gt; parses</span></a>
-<a class="sourceLine" id="cb33-16" title="16"><span class="co">#[Tree('S', [Tree('NP', [Tree('Det', ['the']), Tree('N', ['man'])]), Tree('VP', [Tree('IV', ['walk'])])])]</span></a></code></pre></div>
-<p><a href="src/NLTK-CF3.py">src/NLTK-CF3.py</a></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" title="1"><span class="im">from</span> nltk <span class="im">import</span> CFG,ChartParser</a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="im">from</span> nltk.tokenize <span class="im">import</span> SpaceTokenizer</a>
-<a class="sourceLine" id="cb34-3" title="3">grammar <span class="op">=</span> CFG.fromstring(<span class="st">&quot;&quot;&quot;</span></a>
-<a class="sourceLine" id="cb34-4" title="4"><span class="st">  S -&gt; NP_Sg VP_Sg</span></a>
-<a class="sourceLine" id="cb34-5" title="5"><span class="st">  S -&gt; NP_Pl VP_Pl</span></a>
-<a class="sourceLine" id="cb34-6" title="6"><span class="st">  NP_Sg -&gt; Det N_Sg</span></a>
-<a class="sourceLine" id="cb34-7" title="7"><span class="st">  NP_Pl -&gt; Det N_Pl</span></a>
-<a class="sourceLine" id="cb34-8" title="8"><span class="st">  VP_Sg -&gt; IV_Sg</span></a>
-<a class="sourceLine" id="cb34-9" title="9"><span class="st">  VP_Pl -&gt; IV_Pl</span></a>
-<a class="sourceLine" id="cb34-10" title="10"><span class="st">  Det -&gt; 'the'</span></a>
-<a class="sourceLine" id="cb34-11" title="11"><span class="st">  N_Sg -&gt; 'man'</span></a>
-<a class="sourceLine" id="cb34-12" title="12"><span class="st">  N_Pl -&gt; 'men'</span></a>
-<a class="sourceLine" id="cb34-13" title="13"><span class="st">  IV_Sg -&gt; 'walks'</span></a>
-<a class="sourceLine" id="cb34-14" title="14"><span class="st">  IV_Pl -&gt; 'walk'</span></a>
-<a class="sourceLine" id="cb34-15" title="15"><span class="st">  &quot;&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb34-16" title="16">parser <span class="op">=</span> ChartParser(grammar)</a>
-<a class="sourceLine" id="cb34-17" title="17">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walk&quot;</span>))</a>
-<a class="sourceLine" id="cb34-18" title="18"><span class="co">#&gt;&gt;&gt; parses</span></a>
-<a class="sourceLine" id="cb34-19" title="19"><span class="co">#[]</span></a>
-<a class="sourceLine" id="cb34-20" title="20">parses <span class="op">=</span> parser.parse_all(SpaceTokenizer().tokenize(<span class="st">&quot;the man walks&quot;</span>))</a>
-<a class="sourceLine" id="cb34-21" title="21"><span class="co">#&gt;&gt;&gt; parses</span></a>
-<a class="sourceLine" id="cb34-22" title="22"><span class="co">#[Tree('S', [Tree('NP_Sg', [Tree('Det', ['the']), Tree('N_Sg', ['man'])]), Tree('VP_Sg', [Tree('IV_Sg', ['walks'])])])]</span></a></code></pre></div>
-<h4 id="exercise-2">Exercise</h4>
+<p><a href="src/NLTK-CF.py" class="uri">src/NLTK-CF.py</a></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode include python"><code class="sourceCode python"><a class="sourceLine" id="cb32-1" data-line-number="1">src<span class="op">/</span>NLTK<span class="op">-</span>CF.py</a></code></pre></div>
+<p><a href="src/NLTK-CF2.py" class="uri">src/NLTK-CF2.py</a></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode include python"><code class="sourceCode python"><a class="sourceLine" id="cb33-1" data-line-number="1">src<span class="op">/</span>NLTK<span class="op">-</span>CF2.py</a></code></pre></div>
+<p><a href="src/NLTK-CF3.py" class="uri">src/NLTK-CF3.py</a></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode include python"><code class="sourceCode python"><a class="sourceLine" id="cb34-1" data-line-number="1">src<span class="op">/</span>NLTK<span class="op">-</span>CF3.py</a></code></pre></div>
+<h4 id="exercise-3">Exercise</h4>
 <blockquote>
 <p>Write a context-free grammar accounting for the following sentences in Italian:</p>
 <p>Il mio hovercraft è pieno di anguille</p>
@@ -612,38 +329,13 @@ Prelude.False
 <p>The first one should be accepted and the second one rejected.</p>
 </blockquote>
 <h2 id="context-free-grammars-in-gf">Context-free Grammars in GF</h2>
-<p><a href="src/GF-CF.cf">src/GF-CF.cf</a></p>
-<pre><code>Sentence   . S   ::= NP VP
-NounPhrase . NP  ::= Det N
-VerbPhrase . VP  ::= IV
-Determiner . Det ::= &quot;the&quot;
-Man        . N   ::= &quot;man&quot;
-Walk       . IV  ::= &quot;walks&quot;
-</code></pre>
-<p><a href="src/GF-CF2.cf">src/GF-CF2.cf</a></p>
-<pre><code>Sentence   . S   ::= NP VP
-NounPhrase . NP  ::= Det N
-VerbPhrase . VP  ::= IV
-Determiner . Det ::= &quot;the&quot;
-Man        . N   ::= &quot;man&quot;
-Men        . N   ::= &quot;men&quot;
-Walks      . IV  ::= &quot;walks&quot;
-Walk       . IV  ::= &quot;walk&quot;
-</code></pre>
-<p><a href="src/GF-CF3.cf">src/GF-CF3.cf</a></p>
-<pre><code>SentenceSg   . S     ::= NPSg VPSg
-NounPhraseSg . NPSg  ::= Det NSg
-VerbPhraseSg . VPSg  ::= IVSg
-SentencePl   . S     ::= NPPl VPPl
-NounPhrasePl . NPPl  ::= Det NPl
-VerbPhrasePl . VPPl  ::= IVPl
-Determiner   . Det   ::= &quot;the&quot;
-Man          . NSg   ::= &quot;man&quot;
-Men          . NPl   ::= &quot;men&quot;
-Walks        . IVSg  ::= &quot;walks&quot;
-Walk         . IVPl  ::= &quot;walk&quot;
-</code></pre>
-<h4 id="exercise-3">Exercise</h4>
+<p><a href="src/GF-CF.cf" class="uri">src/GF-CF.cf</a></p>
+<pre class="include"><code>src/GF-CF.cf</code></pre>
+<p><a href="src/GF-CF2.cf" class="uri">src/GF-CF2.cf</a></p>
+<pre class="include"><code>src/GF-CF2.cf</code></pre>
+<p><a href="src/GF-CF3.cf" class="uri">src/GF-CF3.cf</a></p>
+<pre class="include"><code>src/GF-CF3.cf</code></pre>
+<h4 id="exercise-4">Exercise</h4>
 <blockquote>
 <p>Write the same grammar from the previous task in GF. Generate all trees accounted for by the grammar. Can you guess how many trees will be generated from a grammar?</p>
 </blockquote>
@@ -653,75 +345,12 @@ Walk         . IVPl  ::= &quot;walk&quot;
 <p>We can implement this kind of function both in Python and GF.</p>
 <h3 id="smart-paradigms-in-python">Smart paradigms in Python</h3>
 <p>An example for a smart paradigm is the following function for German nouns</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" title="1">from enum <span class="kw">import</span> <span class="dt">Enum</span></a>
-<a class="sourceLine" id="cb38-2" title="2"></a>
-<a class="sourceLine" id="cb38-3" title="3"><span class="kw">class</span> <span class="dt">Number</span>(<span class="dt">Enum</span>)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb38-4" title="4">    <span class="dt">Sg</span> <span class="fu">=</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb38-5" title="5">    <span class="dt">Pl</span> <span class="fu">=</span> <span class="dv">2</span></a>
-<a class="sourceLine" id="cb38-6" title="6"><span class="kw">class</span> <span class="dt">Case</span>(<span class="dt">Enum</span>)<span class="fu">:</span></a>
-<a class="sourceLine" id="cb38-7" title="7">    <span class="dt">Nom</span> <span class="fu">=</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb38-8" title="8">    <span class="dt">Gen</span> <span class="fu">=</span> <span class="dv">2</span> </a>
-<a class="sourceLine" id="cb38-9" title="9">    <span class="dt">Dat</span> <span class="fu">=</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb38-10" title="10">    <span class="dt">Acc</span> <span class="fu">=</span> <span class="dv">4</span></a>
-<a class="sourceLine" id="cb38-11" title="11"></a>
-<a class="sourceLine" id="cb38-12" title="12">def smartNoun(mann) <span class="fu">:</span></a>
-<a class="sourceLine" id="cb38-13" title="13">    nomPl <span class="fu">=</span> (mann<span class="fu">.</span>replace(<span class="ch">'a'</span>,<span class="ch">'ä'</span>)</a>
-<a class="sourceLine" id="cb38-14" title="14">                 <span class="fu">.</span>replace(<span class="ch">'o'</span>,<span class="ch">'ö'</span>)</a>
-<a class="sourceLine" id="cb38-15" title="15">                 <span class="fu">.</span>replace(<span class="ch">'u'</span>,<span class="ch">'ü'</span>) <span class="fu">+</span> <span class="st">&quot;er&quot;</span>)</a>
-<a class="sourceLine" id="cb38-16" title="16">    <span class="fu">return</span> {</a>
-<a class="sourceLine" id="cb38-17" title="17">        <span class="dt">Number.Sg</span><span class="fu">:</span> {</a>
-<a class="sourceLine" id="cb38-18" title="18">            <span class="dt">Case.Nom</span><span class="fu">:</span> mann,</a>
-<a class="sourceLine" id="cb38-19" title="19">            <span class="dt">Case.Gen</span><span class="fu">:</span> mann <span class="fu">+</span> <span class="st">&quot;s&quot;</span>,</a>
-<a class="sourceLine" id="cb38-20" title="20">            <span class="dt">Case.Dat</span><span class="fu">:</span> mann,</a>
-<a class="sourceLine" id="cb38-21" title="21">            <span class="dt">Case.Acc</span><span class="fu">:</span> mann</a>
-<a class="sourceLine" id="cb38-22" title="22">      },</a>
-<a class="sourceLine" id="cb38-23" title="23">      <span class="dt">Number.Pl</span><span class="fu">:</span> {</a>
-<a class="sourceLine" id="cb38-24" title="24">          <span class="dt">Case.Nom</span><span class="fu">:</span> nomPl,</a>
-<a class="sourceLine" id="cb38-25" title="25">          <span class="dt">Case.Gen</span><span class="fu">:</span> nomPl,</a>
-<a class="sourceLine" id="cb38-26" title="26">          <span class="dt">Case.Dat</span><span class="fu">:</span> nomPl <span class="fu">+</span> <span class="st">&quot;n&quot;</span>,</a>
-<a class="sourceLine" id="cb38-27" title="27">          <span class="dt">Case.Acc</span><span class="fu">:</span> nomPl</a>
-<a class="sourceLine" id="cb38-28" title="28">      }</a>
-<a class="sourceLine" id="cb38-29" title="29">    }</a></code></pre></div>
-<h4 id="exercise-4">Exercise</h4>
+<div class="sourceCode" id="cb38"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb38-1" data-line-number="1">src<span class="fu">/</span>SmartParadigm.py</a></code></pre></div>
+<h4 id="exercise-5">Exercise</h4>
 <blockquote>
 <p>Implement a function that takes a string of a noun and generates the regular noun paradigm for English as a dictionary of dictionaries. Also define all necessary grammatical features as enumeration types</p>
 </blockquote>
 <h3 id="smart-paradigms-in-gf">Smart paradigms in GF</h3>
-<div class="sourceCode" id="cb39"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb39-1" title="1"><span class="fu">--#</span> <span class="fu">-</span>coding<span class="fu">=</span>utf8</a>
-<a class="sourceLine" id="cb39-2" title="2">resource <span class="dt">SmartParadigm</span> <span class="fu">=</span> {</a>
-<a class="sourceLine" id="cb39-3" title="3">  </a>
-<a class="sourceLine" id="cb39-4" title="4">  param <span class="dt">Case</span> <span class="fu">=</span> <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Gen</span> <span class="fu">|</span> <span class="dt">Dat</span> <span class="fu">|</span> <span class="dt">Acc</span> ;</a>
-<a class="sourceLine" id="cb39-5" title="5">  param <span class="dt">Number</span> <span class="fu">=</span> <span class="dt">Sg</span> <span class="fu">|</span> <span class="dt">Pl</span> ;</a>
-<a class="sourceLine" id="cb39-6" title="6">  oper</a>
-<a class="sourceLine" id="cb39-7" title="7">    <span class="dt">Noun</span> <span class="fu">:</span> <span class="dt">Type</span> <span class="fu">=</span> { s <span class="fu">:</span> <span class="dt">Number</span> <span class="ot">=&gt;</span> <span class="dt">Case</span> <span class="ot">=&gt;</span> <span class="dt">Str</span> } ;</a>
-<a class="sourceLine" id="cb39-8" title="8">    regNoun <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Noun</span> <span class="fu">=</span> \n <span class="ot">-&gt;</span></a>
-<a class="sourceLine" id="cb39-9" title="9">      <span class="kw">let</span> um <span class="fu">=</span> umlaut n <span class="kw">in</span></a>
-<a class="sourceLine" id="cb39-10" title="10">      { s <span class="fu">=</span> table <span class="dt">Number</span> { <span class="dt">Sg</span> <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb39-11" title="11">			     table <span class="dt">Case</span> {</a>
-<a class="sourceLine" id="cb39-12" title="12">			       <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Dat</span> <span class="fu">|</span> <span class="dt">Acc</span> <span class="ot">=&gt;</span> n ;</a>
-<a class="sourceLine" id="cb39-13" title="13">			       <span class="dt">Gen</span> <span class="ot">=&gt;</span> n <span class="fu">+</span> <span class="st">&quot;es&quot;</span></a>
-<a class="sourceLine" id="cb39-14" title="14">			     } ;</a>
-<a class="sourceLine" id="cb39-15" title="15">			   <span class="dt">Pl</span> <span class="ot">=&gt;</span></a>
-<a class="sourceLine" id="cb39-16" title="16">			     table <span class="dt">Case</span> {</a>
-<a class="sourceLine" id="cb39-17" title="17">			       <span class="dt">Nom</span> <span class="fu">|</span> <span class="dt">Gen</span> <span class="fu">|</span> <span class="dt">Acc</span><span class="ot">=&gt;</span> um <span class="fu">+</span> <span class="st">&quot;er&quot;</span> ;</a>
-<a class="sourceLine" id="cb39-18" title="18">			       <span class="dt">Dat</span> <span class="ot">=&gt;</span> um <span class="fu">+</span> <span class="st">&quot;ern&quot;</span></a>
-<a class="sourceLine" id="cb39-19" title="19">			     }</a>
-<a class="sourceLine" id="cb39-20" title="20">	  }</a>
-<a class="sourceLine" id="cb39-21" title="21">      } ;</a>
-<a class="sourceLine" id="cb39-22" title="22">    umlaut <span class="fu">:</span> <span class="dt">Str</span> <span class="ot">-&gt;</span> <span class="dt">Str</span> <span class="fu">=</span> \s <span class="ot">-&gt;</span> </a>
-<a class="sourceLine" id="cb39-23" title="23">      <span class="kw">case</span> s <span class="kw">of</span> {</a>
-<a class="sourceLine" id="cb39-24" title="24">	p <span class="fu">+</span> <span class="st">&quot;a&quot;</span> <span class="fu">+</span> s <span class="ot">=&gt;</span> p <span class="fu">+</span> <span class="st">&quot;ä&quot;</span> <span class="fu">+</span> s ;</a>
-<a class="sourceLine" id="cb39-25" title="25">	_ <span class="ot">=&gt;</span> s</a>
-<a class="sourceLine" id="cb39-26" title="26">      } ;</a>
-<a class="sourceLine" id="cb39-27" title="27">}</a>
-<a class="sourceLine" id="cb39-28" title="28">      </a>
-<a class="sourceLine" id="cb39-29" title="29">    </a></code></pre></div>
-<h1 id="other-problems">Other problems</h1>
-<ul>
-<li>compile-time vs. run-time strings</li>
-<li>…</li>
-</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode include haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb39-1" data-line-number="1">src<span class="fu">/</span>SmartParadigm.gf</a></code></pre></div>
 <h1 id="the-gf-python-api">The GF-Python API</h1>
 <p>GF ships with a Python runtime: that means your Python program can use the GF API, which is called <code>pgf</code>. There is a longer <a href="http://www.grammaticalframework.org/doc/python-api.html">tutorial</a>. The Python runtime depends on the C runtime. If these runtimes aren’t available in the package you downloaded, it is possible to compile them from source. First compile the C runtime, then install the Python runtime; the INSTALL files describe the process.</p>
-</body>
-</html>
