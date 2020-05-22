@@ -653,5 +653,5 @@ src/SmartParadigm.gf
 
 # The GF-Python API
 
-GF ships with a Python runtime: that means your Python program can use the GF API, which is called `pgf`. There is a longer [tutorial](http://www.grammaticalframework.org/doc/python-api.html). The Python runtime depends on the C runtime. If these runtimes aren't available in the package you downloaded, it is possible to compile them from source. First compile the C runtime, then install the Python runtime; the INSTALL files describe the process.
+GF ships with a Python runtime: that means your Python program can use the GF API, which is called `pgf`. There is a longer [tutorial](http://www.grammaticalframework.org/doc/runtime-api.html#python). The Python runtime depends on the C runtime. If these runtimes aren't available in the package you downloaded, it is possible to compile them from source. First compile the C runtime, then install the Python runtime; the INSTALL files describe the process.
 
