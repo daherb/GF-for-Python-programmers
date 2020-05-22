@@ -219,9 +219,12 @@ you would say
 In GF, the equivalent function definition might read:
 
 ```
+resource Add = open Predef in {
+-- We need Predef for the `plus` function
     oper 
 	  add : Int -> Int -> Int ;
       add amount1 amount2 = plus amount1 amount2 ;
+}
 ```
 
 The left two `Int`s above describe the arguments to `add`, and the rightmost `Int` describes the return value.
