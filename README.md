@@ -11,4 +11,4 @@ You can read it [online](https://daherb.github.io/GF-for-Python-programmers/)
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/daherb/GF-for-Python-programmers/markdown)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/daherb/GF-for-Python-programmers/master)
